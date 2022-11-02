@@ -29,3 +29,11 @@ CREATE DATABASE your_database_name;
 1) Go to the server's directory `cd server`
 
 2) Run the server with `pnpm dev`
+
+### Available scripts
+
+#### Client
+
+- To format your code, run `pnpm format`. This will launch Prettier.
+
+#### Server
