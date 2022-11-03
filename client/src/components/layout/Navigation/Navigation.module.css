@@ -1,0 +1,10 @@
+.main-navigation {
+    margin: 25px 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation-links {
+    display: flex;
+    gap: 35px;
+}
