@@ -20,3 +20,18 @@ export const genericPostRequest = async (
         return false;
     }
 };
+
+/**
+ * Fetches data from url.
+ * @param {string} apiEndpoint - Fetched url with GET method
+ * @returns {}
+ */
+export const genericFetchRequest = async (apiEndPoint: string) => {
+    try {
+        const response = await fetch(apiEndPoint);
+        const data = response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};

@@ -1,18 +1,40 @@
 // React Hooks
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Page components
 import BlogPost from '../../components/BlogPost/BlogPost';
-import { genericPostRequest } from '../../helpers/fetchHandlers';
+import {
+    genericFetchRequest,
+    genericPostRequest,
+} from '../../helpers/fetchHandlers';
 
 // CSS
 import classes from './Blog.module.css';
 
 function Blog() {
+    // States
+    const [blogPosts, setBlogPosts] = useState([]);
+
     // Refs
     const postTitleRef = useRef<HTMLInputElement>(null);
     const postContentRef = useRef<HTMLTextAreaElement>(null);
 
+    // Get blog posts
+    useEffect(() => {
+        const fetchBlogPosts = async () => {
+            const blogPostsData = await genericFetchRequest(
+                'http://localhost:5000/posts/'
+            );
+            setBlogPosts(blogPostsData);
+            console.log(blogPosts);
+        };
+
+        fetchBlogPosts();
+    }, []);
+
+    console.log(blogPosts);
+
+    // Create a blog post
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -53,8 +75,14 @@ function Blog() {
 
             <section>
                 <h2>Your blog posts</h2>
+                {blogPosts.map((blogPost: any, index: number) => (
+                    <BlogPost
+                        title={blogPost.title}
+                        content={blogPost.content}
+                        key={index}
+                    />
+                ))}
             </section>
-            <BlogPost />
         </div>
     );
 }
