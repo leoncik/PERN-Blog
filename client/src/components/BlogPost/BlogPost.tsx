@@ -29,7 +29,7 @@ function BlogPost({ title, content, id }: BlogPostProps) {
             <h2>{title}</h2>
             <p>{content}</p>
             <button onClick={() => handleDeletePost(id)}>DELETE POST</button>
-            <EditPost title={title} content={content} />
+            <EditPost title={title} content={content} id={id} />
         </article>
     );
 }

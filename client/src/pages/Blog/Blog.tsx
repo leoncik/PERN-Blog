@@ -25,6 +25,8 @@ function Blog() {
             const blogPostsData = await genericFetchRequest(
                 'http://localhost:5000/posts/'
             );
+            // Sort posts by id
+            blogPostsData.sort((a: any, b: any) => a.id - b.id);
             setBlogPosts(blogPostsData);
             console.log(blogPosts);
         };

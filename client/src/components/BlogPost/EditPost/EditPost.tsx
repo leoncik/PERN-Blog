@@ -7,9 +7,10 @@ import classes from './EditPost.module.css';
 type EditPostProps = {
     title: string;
     content: string;
+    id: number;
 };
 
-function EditPost({ title, content }: EditPostProps) {
+function EditPost({ title, content, id }: EditPostProps) {
     // States
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [postTitle, setPostTitle] = useState(title);
@@ -22,6 +23,23 @@ function EditPost({ title, content }: EditPostProps) {
         setIsModalVisible(false);
         setPostTitle(title);
         setPostContent(content);
+    };
+
+    const updateBlogPost = async () => {
+        try {
+            const body = {
+                title: postTitle,
+                content: postContent,
+            };
+            const response = await fetch(`http://localhost:5000/posts/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            setIsModalVisible(false);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -44,6 +62,7 @@ function EditPost({ title, content }: EditPostProps) {
                         onChange={(e) => setPostContent(e.target.value)}
                     ></textarea>
                     <button onClick={hideModal}>Cancel</button>
+                    <button onClick={updateBlogPost}>Edit post</button>
                 </div>
             </div>
         </div>
