@@ -36,4 +36,6 @@ CREATE DATABASE your_database_name;
 
 - To format your code, run `pnpm format`. This will launch Prettier.
 
+- To lint your code, run `pnpm link`. This will launch ESLint.
+
 #### Server

@@ -80,6 +80,7 @@ function Blog() {
                         title={blogPost.title}
                         content={blogPost.content}
                         key={index}
+                        id={blogPost.id}
                     />
                 ))}
             </section>
