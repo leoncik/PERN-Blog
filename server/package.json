@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon app",
-        "format": "prettier --write \"**/*.+(js|json|)\""
+        "format": "prettier --write \"**/*.+(js|json|)\"",
+        "lint": "eslint . --cache --fix"
     },
     "keywords": [],
     "author": "",
@@ -17,6 +18,7 @@
         "pg": "^8.8.0"
     },
     "devDependencies": {
+        "eslint": "^8.27.0",
         "nodemon": "^2.0.20",
         "prettier": "^2.7.1"
     }

@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
         );
         res.json(blogPost.rows[0]);
     } catch (err) {
-        console.error(error.message);
+        console.error(err);
     }
 });
 
