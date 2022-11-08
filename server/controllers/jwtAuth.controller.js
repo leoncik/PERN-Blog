@@ -1,5 +1,6 @@
 const pool = require('../config/db');
 const bcrypt = require('bcrypt');
+const jwtGenerator = require('../utils/jwtGenerator');
 
 exports.register = async (req, res) => {
     try {
@@ -21,7 +22,9 @@ exports.register = async (req, res) => {
             [username, email, bcryptPassword]
         );
 
-        res.json(newUser.rows[0]);
+        const token = jwtGenerator(newUser.rows[0].id)
+
+        res.json(token);
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error.');
