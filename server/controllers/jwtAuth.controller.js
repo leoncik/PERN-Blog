@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
             [username, email, bcryptPassword]
         );
 
-        const token = jwtGenerator(newUser.rows[0].id)
+        const token = jwtGenerator(newUser.rows[0].id);
 
         res.json(token);
     } catch (error) {
