@@ -1,6 +1,17 @@
 # PERN-Blog
 
-A full-stack project made with the PERN (PostgreSQL, Express, React, Node.js) stack.
+A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.js).
+
+## Table of contents
+
+-   [How to use](#how-to-use)
+    -   [Setup the database](#setup-the-database)
+    -   [Setup the server](#setup-the-server)
+    -   [Run the server](#run-the-server)
+    -   [Run the client](#run-the-client)
+-   [Available scripts](#available-scripts)
+    -   [Client](#client)
+    -   [Server](#server)
 
 ## How to use
 
@@ -24,13 +35,21 @@ CREATE DATABASE your_database_name;
 
 3) Install the dependencies `pnpm install`
 
+4) Edit the `.env` file that you have created while setting up the database and add a password to encrypt your JSON Web Token.
+
 ### Run the server
 
 1) Go to the server's directory `cd server`
 
 2) Run the server with `pnpm dev`
 
-### Available scripts
+### Run the client
+
+1) Go to the client's directory `cd client`
+
+2) Run the server with `pnpm dev`
+
+## Available scripts
 
 #### Client
 
@@ -39,3 +58,7 @@ CREATE DATABASE your_database_name;
 - To lint your code, run `pnpm link`. This will launch ESLint.
 
 #### Server
+
+- To format your code, run `pnpm format`. This will launch Prettier.
+
+- To lint your code, run `pnpm link`. This will launch ESLint.
