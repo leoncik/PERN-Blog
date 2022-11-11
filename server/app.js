@@ -4,6 +4,7 @@ const cors = require('cors');
 const postRoutes = require('./routes/posts.routes');
 const jwtAuthRoutes = require('./routes/jwtAuth.routes');
 const loginRoutes = require('./routes/login.routes');
+const verifyTokenRoutes = require('./routes/verify-token.routes');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json()); // Allows to access req.body;
 app.use('/posts', postRoutes);
 app.use('/register', jwtAuthRoutes);
 app.use('/login', loginRoutes);
+app.use('/verify-token', verifyTokenRoutes);
 
 app.listen(5000, () => {
     console.log('Listening for requests on port 5000');
