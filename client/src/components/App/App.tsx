@@ -7,6 +7,7 @@ import Error404 from '../../pages/Error404/Error404';
 // Page components
 import Navigation from '../layout/Navigation/Navigation';
 import Blog from '../../pages/Blog/Blog';
+import Register from '../../pages/Register/Register';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <Navigation />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="*" element={<Error404 />} />

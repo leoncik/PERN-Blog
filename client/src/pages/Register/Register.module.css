@@ -1,0 +1,8 @@
+.register-form {
+    width: 300px;
+}
+
+label {
+    display: inline-block;
+    margin-top: 15px;
+}

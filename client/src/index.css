@@ -8,15 +8,20 @@
     src: url('./assets/fonts/overpass/overpass-v12-latin-regular.eot');
     /* IE9 Compat Modes */
     src: local(''),
-        url('./assets/fonts/overpass/overpass-v12-latin-regular.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/overpass/overpass-v12-latin-regular.eot?#iefix')
+            format('embedded-opentype'),
         /* IE6-IE8 */
-        url('./assets/fonts/overpass/overpass-v12-latin-regular.woff2') format('woff2'),
+            url('./assets/fonts/overpass/overpass-v12-latin-regular.woff2')
+            format('woff2'),
         /* Super Modern Browsers */
-        url('./assets/fonts/overpass/overpass-v12-latin-regular.woff') format('woff'),
+            url('./assets/fonts/overpass/overpass-v12-latin-regular.woff')
+            format('woff'),
         /* Modern Browsers */
-        url('./assets/fonts/overpass/overpass-v12-latin-regular.ttf') format('truetype'),
+            url('./assets/fonts/overpass/overpass-v12-latin-regular.ttf')
+            format('truetype'),
         /* Safari, Android, iOS */
-        url('./assets/fonts/overpass/overpass-v12-latin-regular.svg#Overpass') format('svg');
+            url('./assets/fonts/overpass/overpass-v12-latin-regular.svg#Overpass')
+            format('svg');
     /* Legacy iOS */
 }
 
@@ -28,15 +33,20 @@
     src: url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.eot');
     /* IE9 Compat Modes */
     src: local(''),
-        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.eot?#iefix')
+            format('embedded-opentype'),
         /* IE6-IE8 */
-        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.woff2') format('woff2'),
+            url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.woff2')
+            format('woff2'),
         /* Super Modern Browsers */
-        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.woff') format('woff'),
+            url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.woff')
+            format('woff'),
         /* Modern Browsers */
-        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.ttf') format('truetype'),
+            url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.ttf')
+            format('truetype'),
         /* Safari, Android, iOS */
-        url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.svg#CormorantSC') format('svg');
+            url('./assets/fonts/cormorant-sc/cormorant-sc-v17-latin-regular.svg#CormorantSC')
+            format('svg');
     /* Legacy iOS */
 }
 
