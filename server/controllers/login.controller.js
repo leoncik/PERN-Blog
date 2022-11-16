@@ -10,7 +10,9 @@ exports.login = async (req, res) => {
         ]);
 
         if (user.rows.length === 0) {
-            return res.status(401).send('Invalid email.');
+            // Note : we are only checking the email but
+            // for security reason we do not say if the email exists in the database or not.
+            return res.status(401).send('Invalid email or password.');
         }
 
         const validPassword = await bcrypt.compare(
@@ -19,7 +21,7 @@ exports.login = async (req, res) => {
         );
 
         if (!validPassword) {
-            return res.status(401).send('Invalid password.');
+            return res.status(401).send('Invalid email or password.');
         }
 
         const token = jwtGenerator(user.rows[0].id);
