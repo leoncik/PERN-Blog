@@ -4,6 +4,8 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 
 ## Table of contents
 
+-   [Presentation](#presentation)
+    -   [Database schema](#database-schema)
 -   [How to use](#how-to-use)
     -   [Setup the database](#setup-the-database)
     -   [Setup the server](#setup-the-server)
@@ -12,6 +14,12 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 -   [Available scripts](#available-scripts)
     -   [Client](#client)
     -   [Server](#server)
+
+## Presentation
+
+### Database schema
+
+![Database schema](./docs/erd-diagram.png)
 
 ## How to use
 
