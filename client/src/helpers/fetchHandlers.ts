@@ -55,7 +55,8 @@ export const authenticationRequest = async (
         });
         const data = await response.json();
         return data;
-    } catch {
+    } catch (err) {
+        console.log(err);
         return false;
     }
 };

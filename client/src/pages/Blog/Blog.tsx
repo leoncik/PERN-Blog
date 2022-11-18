@@ -9,10 +9,13 @@ import { Navigate } from 'react-router-dom';
 
 // Page components
 import BlogPost from '../../components/BlogPost/BlogPost';
+
+// Helpers
 import {
-    genericFetchRequest,
     genericPostRequest,
+    authenticationRequest,
 } from '../../helpers/fetchHandlers';
+import * as endpoint from '../../helpers/apiEndpoints';
 
 // CSS
 import classes from './Blog.module.css';
@@ -20,6 +23,7 @@ import classes from './Blog.module.css';
 function Blog() {
     // Redux
     const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
+    const token = useSelector((state: any) => state.user.token);
 
     // States
     const [blogPosts, setBlogPosts] = useState([]);
@@ -32,8 +36,9 @@ function Blog() {
     useEffect(() => {
         console.log(isLoggedIn);
         const fetchBlogPosts = async () => {
-            const blogPostsData = await genericFetchRequest(
-                'http://localhost:5000/posts/'
+            const blogPostsData = await authenticationRequest(
+                endpoint.userBlogPostsEndpoint,
+                token
             );
             // Sort posts by id
             blogPostsData.sort((a: any, b: any) => a.id - b.id);

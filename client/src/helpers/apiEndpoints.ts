@@ -14,4 +14,11 @@ const userLoginEndpoint = `${apiBaseUrl}/login`;
  */
 const userProfileEndpoint = `${apiBaseUrl}/user/profile`;
 
-export { userLoginEndpoint, userProfileEndpoint };
+/**
+ * Fetch blog posts from a user
+ * Request type : GET
+ * @returns {string} Returns the endpoint for the user's blog posts.
+ */
+const userBlogPostsEndpoint = `${apiBaseUrl}/posts`;
+
+export { userLoginEndpoint, userProfileEndpoint, userBlogPostsEndpoint };
