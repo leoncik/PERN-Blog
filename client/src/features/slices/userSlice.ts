@@ -12,9 +12,13 @@ const userSlice = createSlice({
     name: 'user',
     initialState: initialState,
     reducers: {
+        setToken: (draft, action) => {
+            draft.token = action.payload
+        },
         setIsLoggedIn: (draft: any, action) => {
-            draft.setIsLoggedIn = true;
-            draft.username = action.payload.body.username;
+            console.log(action.payload);
+            draft.isLoggedIn = true;
+            draft.username = action.payload;
         }
     }
 })

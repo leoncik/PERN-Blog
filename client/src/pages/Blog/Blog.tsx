@@ -1,6 +1,12 @@
 // React Hooks
 import { useEffect, useRef, useState } from 'react';
 
+// Redux
+import { useSelector } from 'react-redux';
+
+// Routing
+import { Navigate } from 'react-router-dom';
+
 // Page components
 import BlogPost from '../../components/BlogPost/BlogPost';
 import {
@@ -12,6 +18,12 @@ import {
 import classes from './Blog.module.css';
 
 function Blog() {
+    // Redux
+    const isLoggedIn = useSelector(
+        (state: any) => state.user.isLoggedIn
+    );
+
+
     // States
     const [blogPosts, setBlogPosts] = useState([]);
 
@@ -21,6 +33,7 @@ function Blog() {
 
     // Get blog posts
     useEffect(() => {
+        console.log(isLoggedIn);
         const fetchBlogPosts = async () => {
             const blogPostsData = await genericFetchRequest(
                 'http://localhost:5000/posts/'
@@ -56,7 +69,7 @@ function Blog() {
         console.log(requestResponse);
     };
 
-    return (
+    return isLoggedIn ? (
         <div className={classes['blog-page']}>
             <h1>Blog page</h1>
             <section>
@@ -87,6 +100,8 @@ function Blog() {
                 ))}
             </section>
         </div>
+    ) : (
+        <Navigate replace to='/' />
     );
 }
 

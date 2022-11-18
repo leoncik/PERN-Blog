@@ -1,9 +1,24 @@
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../features/slices/userSlice';
+
 import classes from './Home.module.css';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
-import { genericPostRequest } from '../../helpers/fetchHandlers';
+
+// Routing
+import { Navigate } from 'react-router-dom';
+
+// Helpers
+import { authenticationRequest, genericPostRequest } from '../../helpers/fetchHandlers';
 
 function Home() {
+    // Redux
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector(
+        (state: any) => state.user.isLoggedIn
+    );
+
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -23,9 +38,18 @@ function Home() {
         );
 
         console.log(requestResponse);
+
+        const token = requestResponse.data.token;
+        dispatch(userActions.setToken(token));
+
+        // Retrieve user's profile
+        const userProfile = await authenticationRequest('http://localhost:5000/user/profile', token);
+        console.log(userProfile);
+
+        dispatch(userActions.setIsLoggedIn(userProfile.username))
     };
 
-    return (
+    return !isLoggedIn ? (
         <div>
             <h1>Welcome back to Scribissimus !</h1>
             <form onSubmit={handleLogin} className={classes['login-form']}>
@@ -40,6 +64,8 @@ function Home() {
                 You don't have an account yet ? Create one !
             </Link>
         </div>
+    ) : (
+        <Navigate replace to='/profile' />
     );
 }
 

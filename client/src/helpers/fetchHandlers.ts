@@ -35,3 +35,27 @@ export const genericFetchRequest = async (apiEndPoint: string) => {
         console.error(error);
     }
 };
+
+/**
+ * Send a POST request to authenticate user.
+ * @param {string} apiEndpoint - Fetched URL
+ * @param {string} token - user's token
+ * @returns
+ */
+export const authenticationRequest = async (
+    apiEndpoint: string,
+    token: string
+) => {
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'GET',
+            headers: {
+                token: token,
+            },
+        });
+        const data = await response.json();
+        return data;
+    } catch {
+        return false;
+    }
+};
