@@ -9,5 +9,5 @@ export const store = configureStore({
     reducer: {
         user: userSlice.reducer,
         blogPosts: blogPostsSlice.reducer,
-    }
-})
+    },
+});

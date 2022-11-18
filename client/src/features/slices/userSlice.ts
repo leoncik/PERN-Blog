@@ -13,15 +13,15 @@ const userSlice = createSlice({
     initialState: initialState,
     reducers: {
         setToken: (draft, action) => {
-            draft.token = action.payload
+            draft.token = action.payload;
         },
         setIsLoggedIn: (draft: any, action) => {
             console.log(action.payload);
             draft.isLoggedIn = true;
             draft.username = action.payload;
-        }
-    }
-})
+        },
+    },
+});
 
 export default userSlice;
 

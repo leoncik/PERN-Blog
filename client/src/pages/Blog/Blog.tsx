@@ -19,10 +19,7 @@ import classes from './Blog.module.css';
 
 function Blog() {
     // Redux
-    const isLoggedIn = useSelector(
-        (state: any) => state.user.isLoggedIn
-    );
-
+    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
 
     // States
     const [blogPosts, setBlogPosts] = useState([]);
@@ -101,7 +98,7 @@ function Blog() {
             </section>
         </div>
     ) : (
-        <Navigate replace to='/' />
+        <Navigate replace to="/" />
     );
 }
 

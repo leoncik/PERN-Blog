@@ -6,18 +6,14 @@ import { Navigate } from 'react-router-dom';
 
 function Profile() {
     // Redux
-    const isLoggedIn = useSelector(
-        (state: any) => state.user.isLoggedIn
-    );
-    const username = useSelector(
-        (state: any) => state.user.username
-    );
+    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
+    const username = useSelector((state: any) => state.user.username);
 
     return !isLoggedIn ? (
-        <Navigate replace to='/' />
+        <Navigate replace to="/" />
     ) : (
         <div>
-                <p>Welcome to your profile, {username}</p>
+            <p>Welcome to your profile, {username}</p>
         </div>
     );
 }
