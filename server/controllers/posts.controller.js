@@ -1,8 +1,16 @@
 const pool = require('../config/db');
 
+// Todo (refactor) : edit payload of jwtGenerator in order to access user id with req.user.id instead of req.user.
+
+// Get all posts from a specific user
 exports.getAllPosts = async (req, res) => {
     try {
-        const allBlogPosts = await pool.query('SELECT * FROM blog_posts');
+        console.log(req.user);
+        const allBlogPosts = await pool.query(
+            `SELECT * FROM users
+             LEFT JOIN blog_posts ON users.id = blog_posts.user_id
+             WHERE users.id = $1`
+            , [req.user])
         res.json(allBlogPosts.rows);
     } catch (err) {
         console.error(err.message);
@@ -13,8 +21,8 @@ exports.createPost = async (req, res) => {
     try {
         const { title, content } = req.body;
         const newBlogPost = await pool.query(
-            'INSERT INTO blog_posts (title, content) VALUES($1, $2) RETURNING *',
-            [title, content]
+            'INSERT INTO blog_posts (title, content, user_id) VALUES($1, $2, $3) RETURNING *',
+            [title, content, req.user]
         );
         res.json(newBlogPost.rows[0]);
     } catch (err) {

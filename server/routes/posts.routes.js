@@ -3,8 +3,11 @@ const router = require('express').Router();
 // Controllers
 const postsControllers = require('../controllers/posts.controller');
 
-router.post('/', postsControllers.createPost);
-router.get('/', postsControllers.getAllPosts);
+// Middlewares
+const authorization = require('../middlewares/authorization');
+
+router.post('/', authorization, postsControllers.createPost);
+router.get('/', authorization, postsControllers.getAllPosts);
 router.get('/:id', postsControllers.selectPost);
 router.put('/:id', postsControllers.editPost);
 router.delete('/:id', postsControllers.deletePost);
