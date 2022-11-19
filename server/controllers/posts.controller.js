@@ -9,8 +9,9 @@ exports.getAllPosts = async (req, res) => {
         const allBlogPosts = await pool.query(
             `SELECT * FROM users
              LEFT JOIN blog_posts ON users.id = blog_posts.user_id
-             WHERE users.id = $1`
-            , [req.user])
+             WHERE users.id = $1`,
+            [req.user]
+        );
         res.json(allBlogPosts.rows);
     } catch (err) {
         console.error(err.message);
@@ -48,10 +49,16 @@ exports.editPost = async (req, res) => {
         const { id } = req.params;
         const { title } = req.body;
         // Todo : set title AND content of the blog
+        // Update a blog post if the id of the post matches user's id.
         const updateBlogPost = await pool.query(
-            'UPDATE blog_posts SET title = $1 WHERE id = $2',
-            [title, id]
+            'UPDATE blog_posts SET title = $1 WHERE id = $2 AND user_id = $3 RETURNING *',
+            [title, id, req.user]
         );
+
+        if (updateBlogPost.rows.length === 0) {
+            return res.json('This blog post does not match the current user.');
+        }
+
         res.json('Blog post has been updated successfully.');
     } catch (err) {
         console.error(err.message);
