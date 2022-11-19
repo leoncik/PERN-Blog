@@ -13,7 +13,7 @@ import BlogPost from '../../components/BlogPost/BlogPost';
 // Helpers
 import {
     genericPostRequest,
-    authenticationRequest,
+    authenticatedRequest,
 } from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
 
@@ -36,7 +36,8 @@ function Blog() {
     useEffect(() => {
         console.log(isLoggedIn);
         const fetchBlogPosts = async () => {
-            const blogPostsData = await authenticationRequest(
+            const blogPostsData = await authenticatedRequest(
+                'GET',
                 endpoint.userBlogPostsEndpoint,
                 token
             );
@@ -63,8 +64,10 @@ function Blog() {
             content: enteredContent,
         };
 
-        const requestResponse: any = await genericPostRequest(
+        const requestResponse: any = await authenticatedRequest(
+            'POST',
             'http://localhost:5000/posts/',
+            token,
             formData
         );
 

@@ -11,7 +11,7 @@ import { Navigate } from 'react-router-dom';
 
 // Helpers
 import {
-    authenticationRequest,
+    authenticatedRequest,
     genericPostRequest,
 } from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
@@ -45,7 +45,8 @@ function Home() {
         dispatch(userActions.setToken(token));
 
         // Retrieve user's profile
-        const userProfile = await authenticationRequest(
+        const userProfile = await authenticatedRequest(
+            'GET',
             endpoint.userProfileEndpoint,
             token
         );

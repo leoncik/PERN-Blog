@@ -36,27 +36,52 @@ export const genericFetchRequest = async (apiEndPoint: string) => {
     }
 };
 
+// Todo : refactor into smaller functions.
 /**
  * Send a POST request to authenticate user.
+ * @param {string} method - fetch method
  * @param {string} apiEndpoint - Fetched URL
  * @param {string} token - user's token
  * @returns
  */
-export const authenticationRequest = async (
+export const authenticatedRequest = async (
+    method: string,
     apiEndpoint: string,
-    token: string
+    token: string,
+    requestBody = {}
 ) => {
-    try {
-        const response = await fetch(apiEndpoint, {
-            method: 'GET',
-            headers: {
-                token: token,
-            },
-        });
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-        return false;
+    switch (method) {
+        case 'GET':
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'GET',
+                    headers: {
+                        token: token,
+                    },
+                });
+                const data = await response.json();
+                return data;
+            } catch (err) {
+                console.log(err);
+                return false;
+            }
+        case 'POST':
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        token: token,
+                    },
+                    body: JSON.stringify(requestBody),
+                });
+                const data = await response.json();
+                return { data };
+            } catch {
+                return false;
+            }
+
+        default:
+            break;
     }
 };
