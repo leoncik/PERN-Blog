@@ -10,6 +10,6 @@ router.post('/', authorization, postsControllers.createPost);
 router.get('/', authorization, postsControllers.getAllPosts);
 // router.get('/:id', postsControllers.selectPost);
 router.put('/:id', authorization, postsControllers.editPost);
-// router.delete('/:id', postsControllers.deletePost);
+router.delete('/:id', authorization, postsControllers.deletePost);
 
 module.exports = router;

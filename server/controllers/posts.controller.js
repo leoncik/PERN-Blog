@@ -69,9 +69,14 @@ exports.deletePost = async (req, res) => {
     try {
         const { id } = req.params;
         const deleteBlogPost = await pool.query(
-            'DELETE FROM blog_posts WHERE id = $1',
-            [id]
+            'DELETE FROM blog_posts WHERE id = $1 AND user_id = $2 RETURNING *',
+            [id, req.user]
         );
+
+        if (deleteBlogPost.rows.length === 0) {
+            return res.json('This blog post does not match the current user.');
+        }
+
         res.json('Blog post has been deleted successfully.');
     } catch (err) {
         console.error(err.message);
