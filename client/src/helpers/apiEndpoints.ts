@@ -15,10 +15,22 @@ const userLoginEndpoint = `${apiBaseUrl}/login`;
 const userProfileEndpoint = `${apiBaseUrl}/user/profile`;
 
 /**
+ * Edit a user's username
+ * Request type : PUT
+ * @returns {string} Returns the endpoint for the user's profile username.
+ */
+const userProfileUsernameEndpoint = `${apiBaseUrl}/user/profile/username`;
+
+/**
  * Fetch blog posts from a user
  * Request type : GET
  * @returns {string} Returns the endpoint for the user's blog posts.
  */
 const userBlogPostsEndpoint = `${apiBaseUrl}/posts`;
 
-export { userLoginEndpoint, userProfileEndpoint, userBlogPostsEndpoint };
+export {
+    userLoginEndpoint,
+    userProfileEndpoint,
+    userBlogPostsEndpoint,
+    userProfileUsernameEndpoint,
+};

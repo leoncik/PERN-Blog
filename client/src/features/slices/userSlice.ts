@@ -30,6 +30,9 @@ const userSlice = createSlice({
         setIsLoggedOut: (draft: IUserState) => {
             draft.isLoggedIn = false;
         },
+        editUsername: (draft: IUserState, action) => {
+            draft.username = action.payload;
+        },
     },
 });
 

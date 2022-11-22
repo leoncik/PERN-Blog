@@ -15,3 +15,17 @@ exports.getProfile = async (req, res) => {
         return res.status(500).send('Server error.');
     }
 };
+
+exports.editUsername = async (req, res) => {
+    try {
+        const { username } = req.body;
+        const profile = await pool.query(
+            `UPDATE users SET username = $1
+             WHERE id = $2`,
+            [username, req.user]
+        );
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send('Server error.');
+    }
+};
