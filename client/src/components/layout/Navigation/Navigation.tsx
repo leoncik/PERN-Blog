@@ -27,15 +27,15 @@ function Navigation() {
             <div className={classes['navigation-logo']}>
                 <NavLink to="/">Scribissimus</NavLink>
             </div>
-            <div className={classes['navigation-links']}>
-                <NavLink to="/blog">Blog</NavLink>
-                <NavLink to="/profile">Profile</NavLink>
-                {isLoggedIn && (
+            {isLoggedIn && (
+                <div className={classes['navigation-links']}>
+                    <NavLink to="/blog">Blog</NavLink>
+                    <NavLink to="/profile">Profile</NavLink>
                     <NavLink onClick={handleLogout} to="/">
                         Log out
                     </NavLink>
-                )}
-            </div>
+                </div>
+            )}
         </nav>
     );
 }

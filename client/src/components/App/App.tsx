@@ -8,6 +8,7 @@ import Error404 from '../../pages/Error404/Error404';
 import Navigation from '../layout/Navigation/Navigation';
 import Blog from '../../pages/Blog/Blog';
 import Register from '../../pages/Register/Register';
+import Login from '../../pages/Login/Login';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Navigation />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/blog" element={<Blog />} />
