@@ -1,3 +1,7 @@
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../../features/slices/userSlice';
+
 // Routing
 import { NavLink } from 'react-router-dom';
 
@@ -5,6 +9,14 @@ import { NavLink } from 'react-router-dom';
 import classes from './Navigation.module.css';
 
 function Navigation() {
+    // Redux
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
+
+    const handleLogout = () => {
+        dispatch(userActions.setIsLoggedOut());
+    };
+
     return (
         <nav className={classes['main-navigation']}>
             <div className={classes['navigation-logo']}>
@@ -13,6 +25,11 @@ function Navigation() {
             <div className={classes['navigation-links']}>
                 <NavLink to="/blog">Blog</NavLink>
                 <NavLink to="/profile">Profile</NavLink>
+                {isLoggedIn && (
+                    <NavLink onClick={handleLogout} to="/">
+                        Log out
+                    </NavLink>
+                )}
             </div>
         </nav>
     );

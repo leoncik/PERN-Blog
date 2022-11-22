@@ -16,9 +16,11 @@ const userSlice = createSlice({
             draft.token = action.payload;
         },
         setIsLoggedIn: (draft: any, action) => {
-            console.log(action.payload);
             draft.isLoggedIn = true;
             draft.username = action.payload;
+        },
+        setIsLoggedOut: (draft: any) => {
+            draft.isLoggedIn = false;
         },
     },
 });

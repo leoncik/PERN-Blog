@@ -1,7 +1,9 @@
 .main-navigation {
-    margin: 25px 45px;
+    padding: 25px 45px;
     display: flex;
     justify-content: space-between;
+    background-color: #2e2e2e;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 }
 
 .navigation-links {
