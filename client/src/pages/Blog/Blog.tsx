@@ -11,19 +11,22 @@ import { Navigate } from 'react-router-dom';
 import BlogPost from '../../components/BlogPost/BlogPost';
 
 // Helpers
-import {
-    genericPostRequest,
-    authenticatedRequest,
-} from '../../helpers/fetchHandlers';
+import { authenticatedRequest } from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
 
 // CSS
 import classes from './Blog.module.css';
 
+// Interfaces
+import { IRootState } from '../../store';
+import { IBlogPosts } from '../../features/slices/blogPostsSlices';
+
 function Blog() {
     // Redux
-    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
-    const token = useSelector((state: any) => state.user.token);
+    const isLoggedIn = useSelector(
+        (state: IRootState) => state.user.isLoggedIn
+    );
+    const token = useSelector((state: IRootState) => state.user.token);
 
     // States
     const [blogPosts, setBlogPosts] = useState([]);
@@ -42,7 +45,8 @@ function Blog() {
                 token
             );
             // Sort posts by id
-            blogPostsData.sort((a: any, b: any) => a.id - b.id);
+            // Todo : Edit returned values when fetching blog posts (only id, title and content).
+            blogPostsData.sort((a: IBlogPosts, b: IBlogPosts) => a.id - b.id);
             setBlogPosts(blogPostsData);
             console.log(blogPosts);
         };
@@ -64,14 +68,12 @@ function Blog() {
             content: enteredContent,
         };
 
-        const requestResponse: any = await authenticatedRequest(
+        await authenticatedRequest(
             'POST',
             'http://localhost:5000/posts/',
             token,
             formData
         );
-
-        console.log(requestResponse);
     };
 
     return isLoggedIn ? (
@@ -95,7 +97,7 @@ function Blog() {
 
             <section>
                 <h2>Your blog posts</h2>
-                {blogPosts.map((blogPost: any, index: number) => (
+                {blogPosts.map((blogPost: IBlogPosts, index: number) => (
                     <BlogPost
                         title={blogPost.title}
                         content={blogPost.content}

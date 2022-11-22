@@ -8,10 +8,15 @@ import { NavLink } from 'react-router-dom';
 // CSS
 import classes from './Navigation.module.css';
 
+// Interfaces
+import { IRootState } from '../../../store';
+
 function Navigation() {
     // Redux
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
+    const isLoggedIn = useSelector(
+        (state: IRootState) => state.user.isLoggedIn
+    );
 
     const handleLogout = () => {
         dispatch(userActions.setIsLoggedOut());

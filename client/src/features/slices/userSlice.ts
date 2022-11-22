@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface IUserState {
+    email: string;
+    password: string;
+    username: string;
+    isLoggedIn: boolean;
+    token: string;
+}
+
 const initialState = {
     email: '',
     password: '',
@@ -15,11 +23,11 @@ const userSlice = createSlice({
         setToken: (draft, action) => {
             draft.token = action.payload;
         },
-        setIsLoggedIn: (draft: any, action) => {
+        setIsLoggedIn: (draft: IUserState, action) => {
             draft.isLoggedIn = true;
             draft.username = action.payload;
         },
-        setIsLoggedOut: (draft: any) => {
+        setIsLoggedOut: (draft: IUserState) => {
             draft.isLoggedIn = false;
         },
     },

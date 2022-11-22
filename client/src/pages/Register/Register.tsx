@@ -23,12 +23,7 @@ function Register() {
         };
         console.log(formData);
 
-        const requestResponse: any = await genericPostRequest(
-            'http://localhost:5000/register/',
-            formData
-        );
-
-        console.log(requestResponse);
+        await genericPostRequest('http://localhost:5000/register/', formData);
     };
     return (
         <div>

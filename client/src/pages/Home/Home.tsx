@@ -16,10 +16,15 @@ import {
 } from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
 
+// Interfaces
+import { IRootState } from '../../store';
+
 function Home() {
     // Redux
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector((state: any) => state.user.isLoggedIn);
+    const isLoggedIn = useSelector(
+        (state: IRootState) => state.user.isLoggedIn
+    );
 
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);

@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux';
 // CSS
 import classes from './BlogPost.module.css';
 
+// Interfaces
+import { IRootState } from '../../store';
+
 type BlogPostProps = {
     title: string;
     content: string;
@@ -15,19 +18,16 @@ type BlogPostProps = {
 
 function BlogPost({ title, content, id }: BlogPostProps) {
     // Redux
-    const token = useSelector((state: any) => state.user.token);
+    const token = useSelector((state: IRootState) => state.user.token);
 
     const handleDeletePost = async (postId: number) => {
         try {
-            const deletePost = await fetch(
-                `http://localhost:5000/posts/${postId}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        token: token,
-                    },
-                }
-            );
+            await fetch(`http://localhost:5000/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    token: token,
+                },
+            });
         } catch (error) {
             console.log(error);
         }

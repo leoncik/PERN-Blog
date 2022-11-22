@@ -1,11 +1,14 @@
 // React hooks
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
 
 // CSS
 import classes from './EditPost.module.css';
+
+// Interfaces
+import { IRootState } from '../../../store';
 
 type EditPostProps = {
     title: string;
@@ -15,7 +18,7 @@ type EditPostProps = {
 
 function EditPost({ title, content, id }: EditPostProps) {
     // Redux
-    const token = useSelector((state: any) => state.user.token);
+    const token = useSelector((state: IRootState) => state.user.token);
 
     // States
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -37,7 +40,7 @@ function EditPost({ title, content, id }: EditPostProps) {
                 title: postTitle,
                 content: postContent,
             };
-            const response = await fetch(`http://localhost:5000/posts/${id}`, {
+            await fetch(`http://localhost:5000/posts/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

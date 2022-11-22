@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export interface IBlogPosts {
+    id: number;
+    title: string;
+    content: string;
+}
+
+export type BlogPostsType = Array<IBlogPosts>;
+
 const initialState = [
     {
         title: '',
