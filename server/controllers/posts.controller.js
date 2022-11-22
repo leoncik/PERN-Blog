@@ -7,7 +7,7 @@ exports.getAllPosts = async (req, res) => {
     try {
         console.log(req.user);
         const allBlogPosts = await pool.query(
-            `SELECT * FROM users
+            `SELECT blog_posts.id, blog_posts.title, blog_posts.content FROM users
              LEFT JOIN blog_posts ON users.id = blog_posts.user_id
              WHERE users.id = $1`,
             [req.user]

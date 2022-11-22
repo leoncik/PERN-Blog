@@ -45,7 +45,6 @@ function Blog() {
                 token
             );
             // Sort posts by id
-            // Todo : Edit returned values when fetching blog posts (only id, title and content).
             blogPostsData.sort((a: IBlogPosts, b: IBlogPosts) => a.id - b.id);
             setBlogPosts(blogPostsData);
             console.log(blogPosts);
