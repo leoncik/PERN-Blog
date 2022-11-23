@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 
 // Page components
 import BlogPost from '../../components/BlogPost/BlogPost';
+import Layout from '../../components/layout/Layout/Layout';
 
 // Helpers
 import { authenticatedRequest } from '../../helpers/fetchHandlers';
@@ -76,36 +77,41 @@ function Blog() {
     };
 
     return isLoggedIn ? (
-        <div className={classes['blog-page']}>
-            <h1>Blog page</h1>
-            <section>
-                <h2>Add a blog post</h2>
-                <form
-                    onSubmit={handleSubmit}
-                    className={classes['new-blog-post-form']}
-                >
-                    <label htmlFor="post-title">Post title</label>
-                    <input ref={postTitleRef} type="text" id="post-title" />
+        <Layout>
+            <div className={classes['blog-page']}>
+                <h1>Blog page</h1>
+                <section>
+                    <h2>Add a blog post</h2>
+                    <form
+                        onSubmit={handleSubmit}
+                        className={classes['new-blog-post-form']}
+                    >
+                        <label htmlFor="post-title">Post title</label>
+                        <input ref={postTitleRef} type="text" id="post-title" />
 
-                    <label htmlFor="post-content">Post content</label>
-                    <textarea ref={postContentRef} id="post-content"></textarea>
+                        <label htmlFor="post-content">Post content</label>
+                        <textarea
+                            ref={postContentRef}
+                            id="post-content"
+                        ></textarea>
 
-                    <button>Add blog post</button>
-                </form>
-            </section>
+                        <button>Add blog post</button>
+                    </form>
+                </section>
 
-            <section>
-                <h2>Your blog posts</h2>
-                {blogPosts.map((blogPost: IBlogPosts, index: number) => (
-                    <BlogPost
-                        title={blogPost.title}
-                        content={blogPost.content}
-                        key={index}
-                        id={blogPost.id}
-                    />
-                ))}
-            </section>
-        </div>
+                <section>
+                    <h2>Your blog posts</h2>
+                    {blogPosts.map((blogPost: IBlogPosts, index: number) => (
+                        <BlogPost
+                            title={blogPost.title}
+                            content={blogPost.content}
+                            key={index}
+                            id={blogPost.id}
+                        />
+                    ))}
+                </section>
+            </div>
+        </Layout>
     ) : (
         <Navigate replace to="/" />
     );

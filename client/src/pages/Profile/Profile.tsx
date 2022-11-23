@@ -8,6 +8,9 @@ import { userActions } from '../../features/slices/userSlice';
 // Routing
 import { Navigate } from 'react-router-dom';
 
+// Page components
+import Layout from '../../components/layout/Layout/Layout';
+
 // Interfaces
 import { IRootState } from '../../store';
 
@@ -56,25 +59,27 @@ function Profile() {
     return !isLoggedIn ? (
         <Navigate replace to="/" />
     ) : (
-        <div>
-            <h1>Welcome to your profile, {username}</h1>
-            <h2>Overview</h2>
+        <Layout>
             <div>
-                <p>Member since :</p>
-                <p>Avatar :</p>
-                <p>Number of posts written :</p>
-            </div>
+                <h1>Welcome to your profile, {username}</h1>
+                <h2>Overview</h2>
+                <div>
+                    <p>Member since :</p>
+                    <p>Avatar :</p>
+                    <p>Number of posts written :</p>
+                </div>
 
-            <h2>Edit your profile</h2>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="post-title">Change your username</label>
-                    <input ref={usernameRef} type="text" id="post-title" />
+                <h2>Edit your profile</h2>
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="post-title">Change your username</label>
+                        <input ref={usernameRef} type="text" id="post-title" />
 
-                    <button>Update username</button>
-                </form>
+                        <button>Update username</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </Layout>
     );
 }
 

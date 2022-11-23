@@ -8,6 +8,9 @@ import { useRef } from 'react';
 // CSS
 import classes from './Login.module.css';
 
+// Page components
+import Layout from '../../components/layout/Layout/Layout';
+
 // Routing
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -64,20 +67,22 @@ function Login() {
     };
 
     return !isLoggedIn ? (
-        <div>
-            <h1>Welcome back to Scribissimus !</h1>
-            <form onSubmit={handleLogin} className={classes['login-form']}>
-                <label htmlFor="email">Email</label>
-                <input ref={emailRef} type="text" id="email" />
+        <Layout>
+            <div>
+                <h1>Welcome back to Scribissimus !</h1>
+                <form onSubmit={handleLogin} className={classes['login-form']}>
+                    <label htmlFor="email">Email</label>
+                    <input ref={emailRef} type="text" id="email" />
 
-                <label htmlFor="password">Password</label>
-                <input ref={passwordRef} type="password" id="password" />
-                <button>Login</button>
-            </form>
-            <Link to="/register">
-                You don't have an account yet ? Create one !
-            </Link>
-        </div>
+                    <label htmlFor="password">Password</label>
+                    <input ref={passwordRef} type="password" id="password" />
+                    <button>Login</button>
+                </form>
+                <Link to="/register">
+                    You don't have an account yet ? Create one !
+                </Link>
+            </div>
+        </Layout>
     ) : (
         <Navigate replace to="/blog" />
     );
