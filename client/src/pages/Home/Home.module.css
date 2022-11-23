@@ -1,0 +1,25 @@
+.hero {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.hero-image {
+    width: 325px;
+    filter: invert(73%) sepia(54%) saturate(1034%) hue-rotate(2deg)
+        brightness(108%) contrast(104%);
+}
+
+.hero-link {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 4px 7px;
+    border-radius: 15px;
+    color: black;
+    background-color: gold;
+    transition: ease-in-out 0.2s;
+}
+
+.hero-link:hover {
+    box-shadow: 0px 0px 4px 2px rgb(143, 123, 14);
+}

@@ -14,6 +14,7 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 -   [Available scripts](#available-scripts)
     -   [Client](#client)
     -   [Server](#server)
+-   [Assets credits](#assets-credits)
 
 ## Presentation
 
@@ -70,3 +71,7 @@ CREATE DATABASE your_database_name;
 - To format your code, run `pnpm format`. This will launch Prettier.
 
 - To lint your code, run `pnpm link`. This will launch ESLint.
+
+## Assets credits
+
+- <a href="https://www.flaticon.com/free-icons/feather" title="feather icons">Feather icons created by Freepik - Flaticon</a>
