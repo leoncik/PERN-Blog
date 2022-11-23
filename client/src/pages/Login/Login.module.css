@@ -6,3 +6,8 @@ label {
     display: inline-block;
     margin-top: 15px;
 }
+
+.register-link {
+    display: inline-block;
+    margin-top: 20px;
+}

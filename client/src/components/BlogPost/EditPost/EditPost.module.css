@@ -1,3 +1,7 @@
+.edit-button {
+    background-color: #ffc107;
+}
+
 .modal {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
@@ -23,4 +27,13 @@ input {
 
 textarea {
     width: 100%;
+}
+
+.cancel-button {
+    background-color: #b9b6ac;
+    color: white;
+    margin-right: 16px;
+}
+.confirm-edit-button {
+    background-color: #ffc107;
 }

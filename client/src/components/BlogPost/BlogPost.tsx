@@ -37,8 +37,10 @@ function BlogPost({ title, content, id }: BlogPostProps) {
         <article className={classes['blog-post']}>
             <h2>{title}</h2>
             <p>{content}</p>
-            <button onClick={() => handleDeletePost(id)}>DELETE POST</button>
-            <EditPost title={title} content={content} id={id} />
+            <div className={classes["action-buttons"]}>
+                <EditPost title={title} content={content} id={id} />
+                <button className={classes['delete-button']} onClick={() => handleDeletePost(id)}>DELETE POST</button>
+            </div>
         </article>
     );
 }

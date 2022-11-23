@@ -1,4 +1,17 @@
 .blog-post {
+    margin-bottom: 40px;
+    padding: 12px 25px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: rgb(44, 43, 37);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+}
+
+.delete-button {
+    color: white;
+    background-color: rgb(197, 31, 31);
 }

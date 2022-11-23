@@ -78,7 +78,7 @@ function Login() {
                     <input ref={passwordRef} type="password" id="password" />
                     <button>Login</button>
                 </form>
-                <Link to="/register">
+                <Link className={classes['register-link']} to="/register">
                     You don't have an account yet ? Create one !
                 </Link>
             </div>

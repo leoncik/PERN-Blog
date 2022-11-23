@@ -86,3 +86,16 @@ ul {
     padding-left: 0;
     margin-top: 0;
 }
+
+button {
+    font-family: 'Overpass';
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+button:active {
+    transform: scale(0.98);
+}
+
