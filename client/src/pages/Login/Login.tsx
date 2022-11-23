@@ -1,6 +1,6 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../features/slices/userSlice';
+import { userActions } from '../../features/userSlice';
 
 // React Hooks
 import { useRef } from 'react';
@@ -23,7 +23,7 @@ import {
 import * as endpoint from '../../helpers/apiEndpoints';
 
 // Interfaces
-import { IRootState } from '../../store';
+import { IRootState } from '../../app/store';
 
 function Login() {
     // Redux

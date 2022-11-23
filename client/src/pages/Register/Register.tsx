@@ -11,7 +11,7 @@ import { Navigate } from 'react-router-dom';
 import { genericPostRequest } from '../../helpers/fetchHandlers';
 
 // Interfaces
-import { IRootState } from '../../store';
+import { IRootState } from '../../app/store';
 
 // Page components
 import Layout from '../../components/layout/Layout/Layout';

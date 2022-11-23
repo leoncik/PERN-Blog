@@ -19,8 +19,8 @@ import * as endpoint from '../../helpers/apiEndpoints';
 import classes from './Blog.module.css';
 
 // Interfaces
-import { IRootState } from '../../store';
-import { IBlogPosts } from '../../features/slices/blogPostsSlices';
+import { IRootState } from '../../app/store';
+import { IBlogPosts } from '../../features/blogPostsSlice';
 
 function Blog() {
     // Redux

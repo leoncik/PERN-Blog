@@ -1,6 +1,6 @@
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../../features/slices/userSlice';
+import { userActions } from '../../../features/userSlice';
 
 // Routing
 import { NavLink } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './Navigation.module.css';
 
 // Interfaces
-import { IRootState } from '../../../store';
+import { IRootState } from '../../../app/store';
 
 function Navigation() {
     // Redux

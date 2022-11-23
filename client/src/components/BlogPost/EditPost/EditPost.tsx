@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import classes from './EditPost.module.css';
 
 // Interfaces
-import { IRootState } from '../../../store';
+import { IRootState } from '../../../app/store';
 
 type EditPostProps = {
     title: string;

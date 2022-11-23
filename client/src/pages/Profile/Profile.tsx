@@ -3,7 +3,7 @@ import { useRef } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { userActions } from '../../features/slices/userSlice';
+import { userActions } from '../../features/userSlice';
 
 // Routing
 import { Navigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout/Layout';
 
 // Interfaces
-import { IRootState } from '../../store';
+import { IRootState } from '../../app/store';
 
 // Helpers
 import * as endpoint from '../../helpers/apiEndpoints';
