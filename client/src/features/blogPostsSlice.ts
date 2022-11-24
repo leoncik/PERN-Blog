@@ -37,6 +37,13 @@ const blogPostsSlice = createSlice({
                 }
             });
         },
+        deletePost: (draft: IBlogPostsState, action) => {
+            if (draft.blogPosts) {
+                draft.blogPosts = draft.blogPosts?.filter(
+                    (bloPost) => bloPost.id !== action.payload
+                );
+            }
+        },
     },
 });
 

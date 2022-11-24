@@ -2,7 +2,8 @@
 import EditPost from './EditPost/EditPost';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { blogPostsActions } from '../../features/blogPostsSlice';
 
 // CSS
 import classes from './BlogPost.module.css';
@@ -19,6 +20,7 @@ type BlogPostProps = {
 function BlogPost({ title, content, id }: BlogPostProps) {
     // Redux
     const token = useSelector((state: IRootState) => state.user.token);
+    const dispatch = useDispatch();
 
     const handleDeletePost = async (postId: number) => {
         try {
@@ -28,6 +30,7 @@ function BlogPost({ title, content, id }: BlogPostProps) {
                     token: token,
                 },
             });
+            dispatch(blogPostsActions.deletePost(id));
         } catch (error) {
             console.log(error);
         }
