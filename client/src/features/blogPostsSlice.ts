@@ -6,23 +6,30 @@ export interface IBlogPosts {
     content: string;
 }
 
-export type BlogPostsType = Array<IBlogPosts>;
+export type BlogPostsType = Array<IBlogPosts> | null;
 
-const initialState = [
-    {
-        title: '',
-        content: '',
-    },
-];
+export interface IBlogPostsState {
+    blogPosts: BlogPostsType;
+}
+
+const initialState = {
+    blogPosts: null,
+};
 
 const blogPostsSlice = createSlice({
     name: 'user',
     initialState: initialState,
     reducers: {
-        editPost: (draft: any, action) => {
-            draft.title = action.payload.body.title;
-            draft.content = action.payload.body.content;
+        setBlogPosts: (draft: IBlogPostsState, action) => {
+            draft.blogPosts = action.payload;
         },
+        addBlogPost: (draft: IBlogPostsState, action) => {
+            draft.blogPosts?.push(action.payload);
+        },
+        // editPost: (draft: any, action) => {
+        //     draft.title = action.payload.body.title;
+        //     draft.content = action.payload.body.content;
+        // },
     },
 });
 

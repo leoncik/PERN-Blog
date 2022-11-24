@@ -1,8 +1,8 @@
 // React Hooks
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Routing
 import { Navigate } from 'react-router-dom';
@@ -20,17 +20,18 @@ import classes from './Blog.module.css';
 
 // Interfaces
 import { IRootState } from '../../app/store';
-import { IBlogPosts } from '../../features/blogPostsSlice';
+import { blogPostsActions, IBlogPosts } from '../../features/blogPostsSlice';
 
 function Blog() {
     // Redux
+    const dispatch = useDispatch();
     const isLoggedIn = useSelector(
         (state: IRootState) => state.user.isLoggedIn
     );
     const token = useSelector((state: IRootState) => state.user.token);
-
-    // States
-    const [blogPosts, setBlogPosts] = useState([]);
+    const blogPosts = useSelector(
+        (state: IRootState) => state?.blogPosts?.blogPosts
+    );
 
     // Refs
     const postTitleRef = useRef<HTMLInputElement>(null);
@@ -47,8 +48,7 @@ function Blog() {
             );
             // Sort posts by id
             blogPostsData.sort((a: IBlogPosts, b: IBlogPosts) => a.id - b.id);
-            setBlogPosts(blogPostsData);
-            console.log(blogPosts);
+            dispatch(blogPostsActions.setBlogPosts(blogPostsData));
         };
 
         fetchBlogPosts();
@@ -68,12 +68,13 @@ function Blog() {
             content: enteredContent,
         };
 
-        await authenticatedRequest(
+        const newPost = await authenticatedRequest(
             'POST',
             'http://localhost:5000/posts/',
             token,
             formData
         );
+        dispatch(blogPostsActions.addBlogPost(newPost.data));
     };
 
     return isLoggedIn ? (
@@ -101,14 +102,17 @@ function Blog() {
 
                 <section>
                     <h2>Your blog posts</h2>
-                    {blogPosts.map((blogPost: IBlogPosts, index: number) => (
-                        <BlogPost
-                            title={blogPost.title}
-                            content={blogPost.content}
-                            key={index}
-                            id={blogPost.id}
-                        />
-                    ))}
+                    {/* Map if blogPosts is not undefined or null */}
+                    {blogPosts &&
+                        blogPosts !== null &&
+                        blogPosts.map((blogPost: IBlogPosts, index: number) => (
+                            <BlogPost
+                                title={blogPost.title}
+                                content={blogPost.content}
+                                key={index}
+                                id={blogPost.id}
+                            />
+                        ))}
                 </section>
             </div>
         </Layout>

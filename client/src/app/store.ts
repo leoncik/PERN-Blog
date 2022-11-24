@@ -7,11 +7,11 @@ import blogPostsSlice from '../features/blogPostsSlice';
 
 // Interfaces and types
 import { IUserState } from '../features/userSlice';
-import { BlogPostsType } from '../features/blogPostsSlice';
+import { IBlogPostsState } from '../features/blogPostsSlice';
 
 export interface IRootState {
     user: IUserState;
-    blogPosts: BlogPostsType;
+    blogPosts: IBlogPostsState | null;
 }
 
 export const store = configureStore({

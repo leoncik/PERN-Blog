@@ -2,7 +2,7 @@
 import classes from './Layout.module.css';
 
 type LayoutProps = {
-    children: any;
+    children: React.ReactNode;
 };
 
 function Layout({ children }: LayoutProps) {
