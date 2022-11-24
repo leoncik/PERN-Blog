@@ -2,7 +2,8 @@
 import { useState } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { blogPostsActions } from '../../../features/blogPostsSlice';
 
 // CSS
 import classes from './EditPost.module.css';
@@ -19,6 +20,7 @@ type EditPostProps = {
 function EditPost({ title, content, id }: EditPostProps) {
     // Redux
     const token = useSelector((state: IRootState) => state.user.token);
+    const dispatch = useDispatch();
 
     // States
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -40,14 +42,18 @@ function EditPost({ title, content, id }: EditPostProps) {
                 title: postTitle,
                 content: postContent,
             };
-            await fetch(`http://localhost:5000/posts/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    token: token,
-                },
-                body: JSON.stringify(body),
-            });
+            const editedPost = await fetch(
+                `http://localhost:5000/posts/${id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        token: token,
+                    },
+                    body: JSON.stringify(body),
+                }
+            );
+            dispatch(blogPostsActions.editPost([body, id]));
             setIsModalVisible(false);
         } catch (error) {
             console.log(error);

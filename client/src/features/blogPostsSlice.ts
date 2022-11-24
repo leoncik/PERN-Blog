@@ -26,10 +26,17 @@ const blogPostsSlice = createSlice({
         addBlogPost: (draft: IBlogPostsState, action) => {
             draft.blogPosts?.push(action.payload);
         },
-        // editPost: (draft: any, action) => {
-        //     draft.title = action.payload.body.title;
-        //     draft.content = action.payload.body.content;
-        // },
+        editPost: (draft: IBlogPostsState, action) => {
+            draft.blogPosts?.map((blogPost, index) => {
+                if (
+                    draft?.blogPosts !== null &&
+                    blogPost.id === action.payload[1]
+                ) {
+                    draft.blogPosts[index].title = action.payload[0].title;
+                    draft.blogPosts[index].content = action.payload[0].content;
+                }
+            });
+        },
     },
 });
 
