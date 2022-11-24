@@ -47,12 +47,12 @@ exports.selectPost = async (req, res) => {
 exports.editPost = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title } = req.body;
+        const { title, content } = req.body;
         // Todo : set title AND content of the blog
         // Update a blog post if the id of the post matches user's id.
         const updateBlogPost = await pool.query(
-            'UPDATE blog_posts SET title = $1 WHERE id = $2 AND user_id = $3 RETURNING *',
-            [title, id, req.user]
+            'UPDATE blog_posts SET title = $1, content = $2 WHERE id = $3 AND user_id = $4 RETURNING *',
+            [title, content, id, req.user]
         );
 
         if (updateBlogPost.rows.length === 0) {
