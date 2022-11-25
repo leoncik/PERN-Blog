@@ -29,3 +29,12 @@ exports.editUsername = async (req, res) => {
         return res.status(500).send('Server error.');
     }
 };
+
+exports.sendAvatar = async (req, res) => {
+    try {
+        console.log(req.file);       
+    } catch (error) {
+        console.log(error);
+        
+    }
+};
