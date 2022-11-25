@@ -85,7 +85,9 @@ export const authenticatedRequest = async (
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'multipart/form-data',
+                        // ? Does not work when setting content-type explicitly
+                        // ? Error : Multipart: Boundary not found
+                        // 'Content-Type': 'multipart/form-data',
                         token: token,
                     },
                     body: JSON.stringify(requestBody),
