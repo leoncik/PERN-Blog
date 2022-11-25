@@ -80,6 +80,21 @@ export const authenticatedRequest = async (
             } catch {
                 return false;
             }
+        case 'POST/File':
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        token: token,
+                    },
+                    body: JSON.stringify(requestBody),
+                });
+                const data = await response.json();
+                return { data };
+            } catch {
+                return false;
+            }
 
         default:
             break;

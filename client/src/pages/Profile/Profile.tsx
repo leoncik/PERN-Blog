@@ -16,6 +16,7 @@ import { IRootState } from '../../app/store';
 
 // Helpers
 import * as endpoint from '../../helpers/apiEndpoints';
+import { authenticatedRequest } from '../../helpers/fetchHandlers';
 
 function Profile() {
     // Redux
@@ -28,6 +29,7 @@ function Profile() {
 
     // Refs
     const usernameRef = useRef<HTMLInputElement>(null);
+    const fileRef = useRef<HTMLInputElement>(null);
 
     // Edit username
     const editUsername = async () => {
@@ -56,18 +58,29 @@ function Profile() {
         dispatch(userActions.editUsername(enteredCUsername));
     };
 
+    const handleUploadAvatar = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (fileRef.current?.files !== null && fileRef.current?.files[0]) {
+            const formData = new FormData();
+            formData.append('file', fileRef.current?.files[0]);
+            formData.append('fileName', fileRef.current?.files[0].name);
+            // console.log(fileRef.current?.value);
+            // console.log(fileRef.current?.files[0]);
+            authenticatedRequest(
+                'POST/File',
+                endpoint.userUploadAvatarEndpoint,
+                token,
+                formData
+            );
+        }
+    };
+
     return !isLoggedIn ? (
         <Navigate replace to="/" />
     ) : (
         <Layout>
             <div>
                 <h1>Welcome to your profile, {username}</h1>
-                <h2>Overview</h2>
-                <div>
-                    <p>Member since :</p>
-                    <p>Avatar :</p>
-                    <p>Number of posts written :</p>
-                </div>
 
                 <h2>Edit your profile</h2>
                 <div>
@@ -76,6 +89,20 @@ function Profile() {
                         <input ref={usernameRef} type="text" id="post-title" />
 
                         <button>Update username</button>
+                    </form>
+
+                    <form onSubmit={handleUploadAvatar}>
+                        <label htmlFor="avatar-upload">
+                            Upload your profile picture
+                        </label>
+                        <input
+                            ref={fileRef}
+                            type="file"
+                            accept=".jpg jpeg png webp"
+                            id="avatar-upload"
+                        />
+
+                        <button>Upload avatar</button>
                     </form>
                 </div>
             </div>

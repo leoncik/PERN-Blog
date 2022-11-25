@@ -15,6 +15,13 @@ const userLoginEndpoint = `${apiBaseUrl}/login`;
 const userProfileEndpoint = `${apiBaseUrl}/user/profile`;
 
 /**
+ * Upload user's avatar
+ * Request type : POST
+ * @returns {string} Returns the endpoint for the user's avatar upload.
+ */
+const userUploadAvatarEndpoint = `${apiBaseUrl}/user/profile/upload`;
+
+/**
  * Edit a user's username
  * Request type : PUT
  * @returns {string} Returns the endpoint for the user's profile username.
@@ -33,4 +40,5 @@ export {
     userProfileEndpoint,
     userBlogPostsEndpoint,
     userProfileUsernameEndpoint,
+    userUploadAvatarEndpoint,
 };
