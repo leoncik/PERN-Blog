@@ -91,7 +91,10 @@ function Profile() {
                         <button>Update username</button>
                     </form>
 
-                        <form onSubmit={handleUploadAvatar} encType="multipart/form-data">
+                    <form
+                        onSubmit={handleUploadAvatar}
+                        encType="multipart/form-data"
+                    >
                         <label htmlFor="avatar-upload">
                             Upload your profile picture
                         </label>

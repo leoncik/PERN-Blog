@@ -1,9 +1,8 @@
 const pool = require('../config/db');
+const imgPath = require('../app');
 
 exports.getProfile = async (req, res) => {
     try {
-        // Todo : for a future version, this query could also return more stats.
-        // Todo : for now, we just return the username to display It in the main navigation.
         const profile = await pool.query(
             'SELECT username FROM users WHERE id = $1',
             [req.user]
@@ -30,11 +29,19 @@ exports.editUsername = async (req, res) => {
     }
 };
 
-exports.sendAvatar = async (req, res) => {
-    try {
-        console.log(req.file);       
-    } catch (error) {
-        console.log(error);
-        
+exports.sendAvatar = (req, res) => {
+    if (!req.files) {
+        return res.status(400).send('No files were uploaded.');
     }
+
+    const file = req.files.file;
+    const imgExtension = file.name.split('.').pop();
+    const path = imgPath + 'avatar.' + 'jpg';
+
+    file.mv(path, (err) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        return res.send({ status: 'success', path: path });
+    });
 };

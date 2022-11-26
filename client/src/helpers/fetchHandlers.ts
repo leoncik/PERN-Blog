@@ -48,7 +48,7 @@ export const authenticatedRequest = async (
     method: string,
     apiEndpoint: string,
     token: string,
-    requestBody = {}
+    requestBody: any = {}
 ) => {
     switch (method) {
         case 'GET':
@@ -90,7 +90,7 @@ export const authenticatedRequest = async (
                         // 'Content-Type': 'multipart/form-data',
                         token: token,
                     },
-                    body: JSON.stringify(requestBody),
+                    body: requestBody,
                 });
                 const data = await response.json();
                 return { data };
