@@ -1,5 +1,5 @@
 // React Hooks
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,6 +30,10 @@ function Profile() {
     // Refs
     const usernameRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
+
+    // Local states
+    const baseAvatarSrc = 'http://localhost:5000/images/avatar.jpg'
+    const [avatarSrc, setAvatarSrc] = useState(`${baseAvatarSrc}?lastmod=${Date.now()}`);
 
     // Edit username
     const editUsername = async () => {
@@ -72,6 +76,7 @@ function Profile() {
                 token,
                 formData
             );
+            setAvatarSrc(`${baseAvatarSrc}?lastmod=${Date.now()}`)
         }
     };
 
@@ -81,6 +86,7 @@ function Profile() {
         <Layout>
             <div>
                 <h1>Welcome to your profile, {username}</h1>
+                    <img src={avatarSrc} alt="Your profile picture." />
 
                 <h2>Edit your profile</h2>
                 <div>
@@ -102,7 +108,7 @@ function Profile() {
                             ref={fileRef}
                             type="file"
                             name="uploaded_file"
-                            accept=".jpg jpeg png webp"
+                            accept="jpg jpeg png webp"
                             id="avatar-upload"
                         />
 

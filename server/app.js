@@ -19,6 +19,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Allows to access req.body;
 app.use(fileUpload()); // Allows to access req.file;
+app.use('/images', express.static('images')); // Allows to serve static files
 app.use('/posts', postRoutes);
 app.use('/register', jwtAuthRoutes);
 app.use('/login', loginRoutes);
