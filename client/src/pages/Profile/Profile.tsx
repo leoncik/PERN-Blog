@@ -1,5 +1,5 @@
 // React Hooks
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +18,9 @@ import { IRootState } from '../../app/store';
 import * as endpoint from '../../helpers/apiEndpoints';
 import { authenticatedRequest } from '../../helpers/fetchHandlers';
 
+// Assets
+import defaultAvatar from '../../assets/images/defaultAvatar.svg';
+
 function Profile() {
     // Redux
     const token = useSelector((state: IRootState) => state.user.token);
@@ -25,6 +28,7 @@ function Profile() {
         (state: IRootState) => state.user.isLoggedIn
     );
     const username = useSelector((state: IRootState) => state.user.username);
+    const avatar = useSelector((state: IRootState) => state.user.avatar);
     const dispatch = useDispatch();
 
     // Refs
@@ -32,8 +36,7 @@ function Profile() {
     const fileRef = useRef<HTMLInputElement>(null);
 
     // Local states
-    const baseAvatarSrc = 'http://localhost:5000/images/avatar.jpg'
-    const [avatarSrc, setAvatarSrc] = useState(`${baseAvatarSrc}?lastmod=${Date.now()}`);
+    const baseAvatarSrc = 'http://localhost:5000/images/avatar/';
 
     // Edit username
     const editUsername = async () => {
@@ -68,15 +71,18 @@ function Profile() {
             const formData = new FormData();
             formData.append('file', fileRef.current?.files[0]);
             formData.append('fileName', fileRef.current?.files[0].name);
-            // console.log(fileRef.current?.value);
-            // console.log(fileRef.current?.files[0]);
+
             authenticatedRequest(
                 'POST/File',
                 endpoint.userUploadAvatarEndpoint,
                 token,
                 formData
             );
-            setAvatarSrc(`${baseAvatarSrc}?lastmod=${Date.now()}`)
+            setTimeout(() => {
+                dispatch(
+                    userActions.updateAvatar(fileRef.current?.files[0].name)
+                );
+            }, 1000);
         }
     };
 
@@ -86,7 +92,11 @@ function Profile() {
         <Layout>
             <div>
                 <h1>Welcome to your profile, {username}</h1>
-                    <img src={avatarSrc} alt="Your profile picture." />
+                {/* Display a default avatar if user has not upload his own */}
+                <img
+                    src={avatar ? baseAvatarSrc + avatar : defaultAvatar}
+                    alt="Your profile picture."
+                />
 
                 <h2>Edit your profile</h2>
                 <div>

@@ -4,6 +4,7 @@ export interface IUserState {
     email: string;
     password: string;
     username: string;
+    avatar: string;
     isLoggedIn: boolean;
     token: string;
 }
@@ -12,6 +13,7 @@ const initialState = {
     email: '',
     password: '',
     username: '',
+    avatar: '',
     isLoggedIn: false,
     token: '',
 };
@@ -25,13 +27,17 @@ const userSlice = createSlice({
         },
         setIsLoggedIn: (draft: IUserState, action) => {
             draft.isLoggedIn = true;
-            draft.username = action.payload;
+            draft.username = action.payload.username;
+            draft.avatar = action.payload.avatar;
         },
         setIsLoggedOut: (draft: IUserState) => {
             draft.isLoggedIn = false;
         },
         editUsername: (draft: IUserState, action) => {
             draft.username = action.payload;
+        },
+        updateAvatar: (draft: IUserState, action) => {
+            draft.avatar = action.payload;
         },
     },
 });

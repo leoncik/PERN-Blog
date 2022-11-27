@@ -63,7 +63,7 @@ function Login() {
         );
         console.log(userProfile);
 
-        dispatch(userActions.setIsLoggedIn(userProfile.username));
+        dispatch(userActions.setIsLoggedIn(userProfile));
     };
 
     return !isLoggedIn ? (

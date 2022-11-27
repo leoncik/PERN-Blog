@@ -8,7 +8,8 @@ CREATE TABLE users (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     email VARCHAR(300) NOT NULL UNIQUE,
     username VARCHAR(300) NOT NULL,
-    password VARCHAR(300) NOT NULL
+    password VARCHAR(300) NOT NULL,
+    avatar VARCHAR(300)
 );
 
 CREATE TABLE blog_posts (
