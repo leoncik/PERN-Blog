@@ -65,3 +65,19 @@ exports.sendAvatar = async (req, res) => {
         return res.send({ status: 'success', path: path });
     });
 };
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const deleteBlogPosts = await pool.query(
+            'DELETE FROM blog_posts WHERE user_id = $1',
+            [req.user]
+        );
+        const deleteUser = await pool.query('DELETE FROM users WHERE id = $1', [
+            req.user,
+        ]);
+
+        res.json('User and his blog posts has been deleted successfully.');
+    } catch (err) {
+        console.error(err.message);
+    }
+};

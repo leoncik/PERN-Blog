@@ -90,6 +90,21 @@ function Profile() {
         }
     };
 
+    const handleDeleteUser = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await fetch(`http://localhost:5000/user`, {
+                method: 'DELETE',
+                headers: {
+                    token: token,
+                },
+            });
+            dispatch(userActions.deleteUser());
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return !isLoggedIn ? (
         <Navigate replace to="/" />
     ) : (
@@ -167,6 +182,23 @@ function Profile() {
                         <button>Upload avatar</button>
                     </form>
                 </section>
+
+                <Separator />
+
+                <h2>Delete your profile</h2>
+                <p>
+                    If you would like to permanently erase your username and
+                    blog posts with no way to retrieve them again in the future,
+                    you can delete your account.
+                </p>
+                <form
+                    className={classes['delete-profile-form']}
+                    onSubmit={handleDeleteUser}
+                >
+                    <button className={classes['delete-profile-button']}>
+                        Delete your profile
+                    </button>
+                </form>
             </div>
         </Layout>
     );

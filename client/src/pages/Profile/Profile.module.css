@@ -38,3 +38,12 @@
 .edit-profile {
     margin-bottom: 50px;
 }
+
+.delete-profile-form {
+    margin-bottom: 50px;
+}
+
+.delete-profile-button {
+    color: white;
+    background-color: crimson;
+}

@@ -39,6 +39,12 @@ const userSlice = createSlice({
         updateAvatar: (draft: IUserState, action) => {
             draft.avatar = action.payload;
         },
+        deleteUser: (draft: IUserState) => {
+            draft.isLoggedIn = false;
+            draft.username = '';
+            draft.avatar = '';
+            draft.token = '';
+        },
     },
 });
 
