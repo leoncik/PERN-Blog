@@ -98,3 +98,14 @@ button {
 button:active {
     transform: scale(0.98);
 }
+
+input {
+    border: none;
+    border-radius: 5px;
+    height: 28px;
+}
+
+textarea {
+    border-radius: 5px;
+    min-height: 170px;
+}

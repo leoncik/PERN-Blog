@@ -1,5 +1,5 @@
 // React Hooks
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,8 @@ import { Navigate } from 'react-router-dom';
 // Page components
 import BlogPost from '../../components/BlogPost/BlogPost';
 import Layout from '../../components/layout/Layout/Layout';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import Separator from '../../components/layout/Separator/Separator';
 
 // Helpers
 import { authenticatedRequest } from '../../helpers/fetchHandlers';
@@ -37,10 +39,14 @@ function Blog() {
     const postTitleRef = useRef<HTMLInputElement>(null);
     const postContentRef = useRef<HTMLTextAreaElement>(null);
 
+    // States
+    const [isLoading, setIsLoading] = useState(false);
+
     // Get blog posts
     useEffect(() => {
         console.log(isLoggedIn);
         const fetchBlogPosts = async () => {
+            setIsLoading(true);
             const blogPostsData = await authenticatedRequest(
                 'GET',
                 endpoint.userBlogPostsEndpoint,
@@ -55,6 +61,7 @@ function Blog() {
             // Sort posts by id
             blogPostsData.sort((a: IBlogPosts, b: IBlogPosts) => a.id - b.id);
             dispatch(blogPostsActions.setBlogPosts(blogPostsData));
+            setIsLoading(false);
         };
 
         fetchBlogPosts();
@@ -106,10 +113,14 @@ function Blog() {
                     </form>
                 </section>
 
+                <Separator />
+
                 <section>
                     <h2>Your blog posts</h2>
+                    {isLoading && <LoadingSpinner spinnerColor="gold" />}
                     {/* Map if blogPosts is not undefined or null */}
-                    {blogPosts &&
+                    {!isLoading &&
+                        blogPosts &&
                         blogPosts !== null &&
                         blogPosts.length !== 0 &&
                         blogPosts.map((blogPost: IBlogPosts, index: number) => (
@@ -121,7 +132,8 @@ function Blog() {
                             />
                         ))}
                     {/* Display message if user has not made any post yet */}
-                    {blogPosts &&
+                    {!isLoading &&
+                        blogPosts &&
                         blogPosts !== null &&
                         blogPosts.length === 0 && (
                             <p>You haven't written anything yet.</p>

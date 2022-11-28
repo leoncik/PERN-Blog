@@ -32,8 +32,8 @@ textarea {
 .cancel-button {
     background-color: #b9b6ac;
     color: white;
-    margin-right: 16px;
 }
 .confirm-edit-button {
+    margin-right: 16px;
     background-color: #ffc107;
 }

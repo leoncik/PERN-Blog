@@ -18,8 +18,12 @@ import { IRootState } from '../../app/store';
 import * as endpoint from '../../helpers/apiEndpoints';
 import { authenticatedRequest } from '../../helpers/fetchHandlers';
 
+// CSS
+import classes from './Profile.module.css';
+
 // Assets
 import defaultAvatar from '../../assets/images/defaultAvatar.svg';
+import Separator from '../../components/layout/Separator/Separator';
 
 function Profile() {
     // Redux
@@ -92,17 +96,52 @@ function Profile() {
         <Layout>
             <div>
                 <h1>Welcome to your profile, {username}</h1>
+                <h2>Overview</h2>
+                <section className={classes['overview']}>
+                    <div className={classes['stats']}>
+                        <p>
+                            Member since :{' '}
+                            <span className={classes['stat-value']}>
+                                dateOfCreatedAccount.
+                            </span>
+                        </p>
+                        <p>
+                            Number of posts written :{' '}
+                            <span className={classes['stat-value']}>X</span>
+                        </p>
+                    </div>
+                    <div className={classes['frame']}>
+                        <img
+                            className={classes['avatar-picture']}
+                            src={
+                                avatar ? baseAvatarSrc + avatar : defaultAvatar
+                            }
+                            alt="Your profile picture."
+                        />
+                    </div>
+                </section>
                 {/* Display a default avatar if user has not upload his own */}
-                <img
-                    src={avatar ? baseAvatarSrc + avatar : defaultAvatar}
-                    alt="Your profile picture."
-                />
+
+                <Separator />
 
                 <h2>Edit your profile</h2>
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="post-title">Change your username</label>
-                        <input ref={usernameRef} type="text" id="post-title" />
+                <section className={classes['edit-profile']}>
+                    <form
+                        className={classes['edit-profile-form']}
+                        onSubmit={handleSubmit}
+                    >
+                        <label
+                            className={classes['profile-label']}
+                            htmlFor="post-title"
+                        >
+                            Change your username
+                        </label>
+                        <input
+                            className={classes['username-input']}
+                            ref={usernameRef}
+                            type="text"
+                            id="post-title"
+                        />
 
                         <button>Update username</button>
                     </form>
@@ -111,7 +150,10 @@ function Profile() {
                         onSubmit={handleUploadAvatar}
                         encType="multipart/form-data"
                     >
-                        <label htmlFor="avatar-upload">
+                        <label
+                            className={classes['profile-label']}
+                            htmlFor="avatar-upload"
+                        >
                             Upload your profile picture
                         </label>
                         <input
@@ -124,7 +166,7 @@ function Profile() {
 
                         <button>Upload avatar</button>
                     </form>
-                </div>
+                </section>
             </div>
         </Layout>
     );

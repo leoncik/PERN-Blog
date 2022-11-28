@@ -82,16 +82,16 @@ function EditPost({ title, content, id }: EditPostProps) {
                         onChange={(e) => setPostContent(e.target.value)}
                     ></textarea>
                     <button
-                        className={classes['cancel-button']}
-                        onClick={hideModal}
-                    >
-                        Cancel
-                    </button>
-                    <button
                         className={classes['confirm-edit-button']}
                         onClick={updateBlogPost}
                     >
                         Edit post
+                    </button>
+                    <button
+                        className={classes['cancel-button']}
+                        onClick={hideModal}
+                    >
+                        Cancel
                     </button>
                 </div>
             </div>
