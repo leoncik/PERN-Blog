@@ -46,6 +46,12 @@ function Blog() {
                 endpoint.userBlogPostsEndpoint,
                 token
             );
+
+            // Remove empty object if user has not made any posts.
+            // This prevents UI bugs when adding and removing blog posts.
+            if (blogPostsData[0].id == null && blogPostsData.length === 1) {
+                blogPostsData.shift();
+            }
             // Sort posts by id
             blogPostsData.sort((a: IBlogPosts, b: IBlogPosts) => a.id - b.id);
             dispatch(blogPostsActions.setBlogPosts(blogPostsData));
@@ -105,6 +111,7 @@ function Blog() {
                     {/* Map if blogPosts is not undefined or null */}
                     {blogPosts &&
                         blogPosts !== null &&
+                        blogPosts.length !== 0 &&
                         blogPosts.map((blogPost: IBlogPosts, index: number) => (
                             <BlogPost
                                 title={blogPost.title}
@@ -113,6 +120,12 @@ function Blog() {
                                 id={blogPost.id}
                             />
                         ))}
+                    {/* Display message if user has not made any post yet */}
+                    {blogPosts &&
+                        blogPosts !== null &&
+                        blogPosts.length === 0 && (
+                            <p>You haven't written anything yet.</p>
+                        )}
                 </section>
             </div>
         </Layout>
