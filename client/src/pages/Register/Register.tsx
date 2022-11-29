@@ -1,5 +1,6 @@
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../features/userSlice';
 
 // React Hooks
 import { useRef } from 'react';
@@ -8,7 +9,11 @@ import { useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 
 // Helpers
-import { genericPostRequest } from '../../helpers/fetchHandlers';
+import {
+    genericPostRequest,
+    authenticatedRequest,
+} from '../../helpers/fetchHandlers';
+import * as endpoint from '../../helpers/apiEndpoints';
 
 // Interfaces
 import { IRootState } from '../../app/store';
@@ -24,6 +29,7 @@ function Register() {
     const isLoggedIn = useSelector(
         (state: IRootState) => state.user.isLoggedIn
     );
+    const dispatch = useDispatch();
 
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
@@ -40,7 +46,18 @@ function Register() {
         };
         console.log(formData);
 
-        await genericPostRequest('http://localhost:5000/register/', formData);
+        const response: any = await genericPostRequest(
+            'http://localhost:5000/register/',
+            formData
+        );
+        const token = response.data;
+        dispatch(userActions.setToken(token));
+        const newUserProfile = await authenticatedRequest(
+            'GET',
+            endpoint.userProfileEndpoint,
+            token
+        );
+        dispatch(userActions.setIsLoggedIn(newUserProfile));
     };
     return !isLoggedIn ? (
         <Layout>
