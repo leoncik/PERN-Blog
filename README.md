@@ -6,6 +6,7 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 
 -   [Presentation](#presentation)
     -   [Database schema](#database-schema)
+    -   [API documentation](#api-documentation)
 -   [How to use](#how-to-use)
     -   [Setup the database](#setup-the-database)
     -   [Setup the server](#setup-the-server)
@@ -21,6 +22,12 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 ### Database schema
 
 ![Database schema](./docs/erd-diagram.png)
+
+### API documentation
+
+In order to access the API documentation, first make sure that you have installed the required dependencies (see [Setup the server](#setup-the-server)), then run the server (see [Run the server](#run-the-server)).
+
+Once the server is running, visit http://localhost:5000/api-docs to access the API documentation.
 
 ## How to use
 

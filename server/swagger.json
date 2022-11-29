@@ -2,14 +2,144 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Scribissimus API",
-        "description": "An Express API for my PERN project.",
+        "description": "An Express API for my PERN-Blog project.",
         "version": "1.0.0"
     },
     "paths": {
+        "/users/profile": {
+            "get": {
+                "tags": ["User"],
+                "description": "Get user's profile.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched user profile",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "username": {
+                                            "type": "string"
+                                        },
+                                        "avatar": {
+                                            "type": "string"
+                                        },
+                                        "registered_date": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/profile/username": {
+            "put": {
+                "tags": ["User"],
+                "description": "Edit user's username.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "description": "New username",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully edited user's username",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "username": {
+                                            "type": "string"
+                                        },
+                                        "avatar": {
+                                            "type": "string"
+                                        },
+                                        "registered_date": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/profile/upload": {
+            "post": {
+                "tags": ["User"],
+                "description": "Upload user's avatar.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added user's avatar"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "delete": {
+                "tags": ["User"],
+                "description": "Delete user.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted user."
+                    }
+                }
+            }
+        },
+
         "/posts": {
             "get": {
                 "tags": ["Blog posts"],
-                "description": "Get all blog posts of connected user",
+                "description": "Get all blog posts of connected user.",
                 "responses": {
                     "200": {
                         "description": "Successfully fetched all blog posts connected user",
