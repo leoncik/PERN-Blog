@@ -6,6 +6,50 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Login user.",
+                "parameters": [
+                    {
+                        "name": "Credentials",
+                        "in": "body",
+                        "description": "User's credentials",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users/profile": {
             "get": {
                 "tags": ["User"],
@@ -13,10 +57,12 @@
                 "parameters": [
                     {
                         "in": "header",
-                        "type": "string",
                         "name": "Authorization",
                         "description": "JWT token",
-                        "required": true
+                        "required": true,
+                        "schema":{
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -51,12 +97,15 @@
                 "parameters": [
                     {
                         "in": "header",
-                        "type": "string",
                         "name": "Authorization",
                         "description": "JWT token",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
+                        "name": "Username",
                         "in": "body",
                         "description": "New username",
                         "required": true,
@@ -102,10 +151,12 @@
                 "parameters": [
                     {
                         "in": "header",
-                        "type": "string",
                         "name": "Authorization",
                         "description": "JWT token",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -122,10 +173,12 @@
                 "parameters": [
                     {
                         "in": "header",
-                        "type": "string",
                         "name": "Authorization",
                         "description": "JWT token",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -164,6 +217,147 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Blog posts"
+                ],
+                "description": "Add a blog post.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Post content",
+                        "in": "body",
+                        "description": "New post content",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "content": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added blog post"
+                    }
+                }
+            }
+        },
+        "/posts/{postId}": {
+            "put": {
+                "tags": [
+                    "Blog posts"
+                ],
+                "description": "Edit a blog post of connected user.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "postId",
+                        "description": "Id of the blog post that will be edited.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Post content",
+                        "in": "body",
+                        "description": "Edited post content",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "content":  {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully edited blog post.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "content": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Blog posts"
+                ],
+                "description": "Delete a blog post.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "postId",
+                        "description": "Id of the blog post that will be deleted.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted blog post"
                     }
                 }
             }
