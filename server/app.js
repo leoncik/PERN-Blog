@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // Image directory path
 const imgPath = __dirname + '/images/';
@@ -25,6 +27,7 @@ app.use('/register', jwtAuthRoutes);
 app.use('/login', loginRoutes);
 app.use('/verify-token', verifyTokenRoutes);
 app.use('/user', userRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(5000, () => {
     console.log('Listening for requests on port 5000');

@@ -1,0 +1,42 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Scribissimus API",
+        "description": "An Express API for my PERN project.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/posts": {
+            "get": {
+                "tags": ["Blog posts"],
+                "description": "Get all blog posts of connected user",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched all blog posts connected user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "content": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
