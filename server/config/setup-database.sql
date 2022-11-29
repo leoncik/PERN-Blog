@@ -9,6 +9,7 @@ CREATE TABLE users (
     email VARCHAR(300) NOT NULL UNIQUE,
     username VARCHAR(300) NOT NULL,
     password VARCHAR(300) NOT NULL,
+    registered_date DATE DEFAULT CURRENT_DATE,
     avatar VARCHAR(300)
 );
 

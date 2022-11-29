@@ -5,7 +5,7 @@ const fs = require('fs');
 exports.getProfile = async (req, res) => {
     try {
         const profile = await pool.query(
-            'SELECT username, avatar FROM users WHERE id = $1',
+            'SELECT username, avatar, registered_date FROM users WHERE id = $1',
             [req.user]
         );
 

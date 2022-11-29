@@ -33,6 +33,12 @@ function Profile() {
     );
     const username = useSelector((state: IRootState) => state.user.username);
     const avatar = useSelector((state: IRootState) => state.user.avatar);
+    const registredDate = useSelector(
+        (state: IRootState) => state.user.registeredDate
+    );
+    const blogPosts = useSelector(
+        (state: IRootState) => state.blogPosts?.blogPosts
+    );
     const dispatch = useDispatch();
 
     // Refs
@@ -115,14 +121,22 @@ function Profile() {
                 <section className={classes['overview']}>
                     <div className={classes['stats']}>
                         <p>
-                            Member since :{' '}
+                            Member since : 
                             <span className={classes['stat-value']}>
-                                dateOfCreatedAccount.
+                                {new Date(registredDate).getDate() +
+                                    '/' +
+                                    (new Date(registredDate).getMonth() + 1) +
+                                    '/' +
+                                    new Date(registredDate).getFullYear()}
                             </span>
                         </p>
                         <p>
-                            Number of posts written :{' '}
-                            <span className={classes['stat-value']}>X</span>
+                            Number of posts written : 
+                            <span className={classes['stat-value']}>
+                                {blogPosts !== null && blogPosts !== undefined
+                                    ? blogPosts.length
+                                    : 0}
+                            </span>
                         </p>
                     </div>
                     <div className={classes['frame']}>

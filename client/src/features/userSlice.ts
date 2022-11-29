@@ -5,6 +5,7 @@ export interface IUserState {
     password: string;
     username: string;
     avatar: string;
+    registeredDate: string;
     isLoggedIn: boolean;
     token: string;
 }
@@ -14,6 +15,7 @@ const initialState = {
     password: '',
     username: '',
     avatar: '',
+    registeredDate: '',
     isLoggedIn: false,
     token: '',
 };
@@ -29,6 +31,7 @@ const userSlice = createSlice({
             draft.isLoggedIn = true;
             draft.username = action.payload.username;
             draft.avatar = action.payload.avatar;
+            draft.registeredDate = action.payload.registered_date;
         },
         setIsLoggedOut: (draft: IUserState) => {
             draft.isLoggedIn = false;
@@ -44,6 +47,7 @@ const userSlice = createSlice({
             draft.username = '';
             draft.avatar = '';
             draft.token = '';
+            draft.registeredDate = '';
         },
     },
 });
