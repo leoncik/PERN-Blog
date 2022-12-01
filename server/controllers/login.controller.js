@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
 
         const token = jwtGenerator(user.rows[0].id);
 
-        res.json({ token });
+        res.json({ token, status: 200 });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error.');

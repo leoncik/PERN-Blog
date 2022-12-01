@@ -13,15 +13,14 @@ import {
 export const useLogin = () => {
     // States
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<any>(null);
 
     // Redux
     const dispatch = useDispatch();
 
     const login = async (
         loginEndpoint: string,
-        data: any,
-        profileEndpoint: string
+        data: any
     ) => {
         setIsLoading(true);
         setError(null);
@@ -30,14 +29,19 @@ export const useLogin = () => {
             data
         );
 
-        console.log(requestResponse);
-
-        // Save token in Redux's store and local storage
-        const token = requestResponse.data.token;
-        localStorage.setItem('token', token);
-        dispatch(userActions.setToken(token));
-        dispatch(userActions.setIsLoggedIn());
+        if (requestResponse.data.status === 200) {
+            // Save token in Redux's store and local storage
+            const token = requestResponse.data.token;
+            localStorage.setItem('token', token);
+            dispatch(userActions.setToken(token));
+            dispatch(userActions.setIsLoggedIn());
+            setIsLoading(false);
+        } else {
+            setError('Your email or password is incorrect.')
+        }
         setIsLoading(false);
+
+
     };
 
     return { login, isLoading, error };

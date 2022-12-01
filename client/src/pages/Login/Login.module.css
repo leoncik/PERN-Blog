@@ -11,3 +11,11 @@ label {
     display: inline-block;
     margin-top: 20px;
 }
+
+.error-message {
+    background-color: #bd2e2ecf;
+    width: fit-content;
+    padding: 1px 20px;
+    margin-top: 25px;
+    border-radius: 5px;        
+}

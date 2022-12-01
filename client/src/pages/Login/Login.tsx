@@ -34,7 +34,7 @@ function Login() {
         (state: IRootState) => state.user.isLoggedIn
     );
     // Custom Hooks
-    const { login, isLoading } = useLogin();
+    const { login, isLoading, error } = useLogin();
 
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
@@ -49,10 +49,11 @@ function Login() {
         };
         await login(
             endpoint.userLoginEndpoint,
-            formData,
-            endpoint.userProfileEndpoint
+            formData
         );
     };
+
+    console.log(error);
 
     return !isLoggedIn ? (
         <Layout>
@@ -68,6 +69,14 @@ function Login() {
                         {isLoading ? 'Loading...' : 'Login'}
                     </button>
                 </form>
+                
+                    {error && (
+                        <div className={classes['error-message']}>
+                    <p>{error}</p>
+                    </div>
+                       
+                    )}
+                
                 <Link className={classes['register-link']} to="/register">
                     You don't have an account yet ? Create one !
                 </Link>

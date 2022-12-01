@@ -43,7 +43,7 @@ function Profile() {
 
     // Refs
     const usernameRef = useRef<HTMLInputElement>(null);
-    const fileRef = useRef<HTMLInputElement>(null);
+    const fileRef = useRef<HTMLInputElement|null>(null);
 
     // Local states
     const baseAvatarSrc = 'http://localhost:5000/images/avatar/';
@@ -104,6 +104,7 @@ function Profile() {
                 formData
             );
             setTimeout(() => {
+                if (fileRef.current !== null && fileRef.current.files !== null)
                 dispatch(
                     userActions.updateAvatar(fileRef.current?.files[0].name)
                 );
