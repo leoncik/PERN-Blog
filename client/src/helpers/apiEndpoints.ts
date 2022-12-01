@@ -35,10 +35,18 @@ const userProfileUsernameEndpoint = `${apiBaseUrl}/user/profile/username`;
  */
 const userBlogPostsEndpoint = `${apiBaseUrl}/posts`;
 
+/**
+ * Verify if a token is valid
+ * Request type : GET
+ * @returns {string} Returns the endpoint for the token verification.
+ */
+const checkTokenEndpoint = `${apiBaseUrl}/verify-token`;
+
 export {
     userLoginEndpoint,
     userProfileEndpoint,
     userBlogPostsEndpoint,
     userProfileUsernameEndpoint,
     userUploadAvatarEndpoint,
+    checkTokenEndpoint,
 };

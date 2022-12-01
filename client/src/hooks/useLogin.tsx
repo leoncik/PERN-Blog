@@ -32,7 +32,9 @@ export const useLogin = () => {
 
         console.log(requestResponse);
 
+        // Save token in Redux's store and local storage
         const token = requestResponse.data.token;
+        localStorage.setItem('token', token);
         dispatch(userActions.setToken(token));
 
         // Retrieve user's profile

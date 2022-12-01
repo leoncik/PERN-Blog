@@ -20,6 +20,7 @@ function Navigation() {
 
     const handleLogout = () => {
         dispatch(userActions.setIsLoggedOut());
+        localStorage.removeItem('token');
     };
 
     return (

@@ -49,6 +49,9 @@ const userSlice = createSlice({
             draft.token = '';
             draft.registeredDate = '';
         },
+        authenticateUser: (draft: IUserState) => {
+            draft.isLoggedIn = true;
+        },
     },
 });
 
