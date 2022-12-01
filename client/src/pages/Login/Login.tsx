@@ -5,6 +5,9 @@ import { userActions } from '../../features/userSlice';
 // React Hooks
 import { useRef } from 'react';
 
+// Custom Hooks
+import { useLogin } from '../../hooks/useLogin';
+
 // CSS
 import classes from './Login.module.css';
 
@@ -27,10 +30,11 @@ import { IRootState } from '../../app/store';
 
 function Login() {
     // Redux
-    const dispatch = useDispatch();
     const isLoggedIn = useSelector(
         (state: IRootState) => state.user.isLoggedIn
     );
+    // Custom Hooks
+    const { login, isLoading } = useLogin();
 
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
@@ -43,27 +47,11 @@ function Login() {
             email: emailRef.current?.value,
             password: passwordRef.current?.value,
         };
-        console.log(formData);
-
-        const requestResponse: any = await genericPostRequest(
+        await login(
             endpoint.userLoginEndpoint,
-            formData
+            formData,
+            endpoint.userProfileEndpoint
         );
-
-        console.log(requestResponse);
-
-        const token = requestResponse.data.token;
-        dispatch(userActions.setToken(token));
-
-        // Retrieve user's profile
-        const userProfile = await authenticatedRequest(
-            'GET',
-            endpoint.userProfileEndpoint,
-            token
-        );
-        console.log(userProfile);
-
-        dispatch(userActions.setIsLoggedIn(userProfile));
     };
 
     return !isLoggedIn ? (
@@ -76,7 +64,9 @@ function Login() {
 
                     <label htmlFor="password">Password</label>
                     <input ref={passwordRef} type="password" id="password" />
-                    <button>Login</button>
+                    <button disabled={isLoading}>
+                        {isLoading ? 'Loading...' : 'Login'}
+                    </button>
                 </form>
                 <Link className={classes['register-link']} to="/register">
                     You don't have an account yet ? Create one !
