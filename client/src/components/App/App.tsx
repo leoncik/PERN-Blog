@@ -33,7 +33,7 @@ function App() {
             const isAuthenticated = await response.json();
             if (isAuthenticated === true) {
                 dispatch(userActions.setToken(localStorage.token));
-                dispatch(userActions.authenticateUser());
+                dispatch(userActions.setIsLoggedIn());
             }
         } catch (error) {
             console.log(error);

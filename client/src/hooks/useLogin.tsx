@@ -36,16 +36,7 @@ export const useLogin = () => {
         const token = requestResponse.data.token;
         localStorage.setItem('token', token);
         dispatch(userActions.setToken(token));
-
-        // Retrieve user's profile
-        const userProfile = await authenticatedRequest(
-            'GET',
-            profileEndpoint,
-            token
-        );
-        console.log(userProfile);
-
-        dispatch(userActions.setIsLoggedIn(userProfile));
+        dispatch(userActions.setIsLoggedIn());
         setIsLoading(false);
     };
 

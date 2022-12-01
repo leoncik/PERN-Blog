@@ -27,8 +27,10 @@ const userSlice = createSlice({
         setToken: (draft, action) => {
             draft.token = action.payload;
         },
-        setIsLoggedIn: (draft: IUserState, action) => {
+        setIsLoggedIn: (draft: IUserState) => {
             draft.isLoggedIn = true;
+        },
+        setProfile: (draft: IUserState, action) => {
             draft.username = action.payload.username;
             draft.avatar = action.payload.avatar;
             draft.registeredDate = action.payload.registered_date;
@@ -48,9 +50,6 @@ const userSlice = createSlice({
             draft.avatar = '';
             draft.token = '';
             draft.registeredDate = '';
-        },
-        authenticateUser: (draft: IUserState) => {
-            draft.isLoggedIn = true;
         },
     },
 });

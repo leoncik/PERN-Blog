@@ -1,5 +1,5 @@
 // React Hooks
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -47,6 +47,21 @@ function Profile() {
 
     // Local states
     const baseAvatarSrc = 'http://localhost:5000/images/avatar/';
+
+    // Get user's profile data
+    useEffect(() => {
+        console.log(isLoggedIn);
+        const fetchProfile = async () => {
+            const userProfile = await authenticatedRequest(
+                'GET',
+                endpoint.userProfileEndpoint,
+                token
+            );
+            dispatch(userActions.setProfile(userProfile));
+        };
+
+        fetchProfile();
+    }, []);
 
     // Edit username
     const editUsername = async () => {
