@@ -6,7 +6,7 @@ exports.getProfile = async (req, res) => {
     try {
         const profile = await pool.query(
             'SELECT username, avatar, registered_date FROM users WHERE id = $1',
-            [req.user]
+            [req.user.id]
         );
 
         res.json(profile.rows[0]);
@@ -22,7 +22,7 @@ exports.editUsername = async (req, res) => {
         const profile = await pool.query(
             `UPDATE users SET username = $1
              WHERE id = $2`,
-            [username, req.user]
+            [username, req.user.id]
         );
     } catch (error) {
         console.log(error);
@@ -39,13 +39,13 @@ exports.sendAvatar = async (req, res) => {
     const previousAvatar = await pool.query(
         `SELECT avatar FROM users
          WHERE id = $1`,
-        [req.user]
+        [req.user.id]
     );
     const previousAvatarName = previousAvatar.rows[0].avatar;
     const newAvatar = await pool.query(
         `UPDATE users SET avatar = $1
              WHERE id = $2`,
-        [file.name, req.user]
+        [file.name, req.user.id]
     );
 
     // Remove previous avatar file if It exists.
@@ -70,10 +70,10 @@ exports.deleteUser = async (req, res) => {
     try {
         const deleteBlogPosts = await pool.query(
             'DELETE FROM blog_posts WHERE user_id = $1',
-            [req.user]
+            [req.user.id]
         );
         const deleteUser = await pool.query('DELETE FROM users WHERE id = $1', [
-            req.user,
+            req.user.id,
         ]);
 
         res.json('User and his blog posts has been deleted successfully.');

@@ -1,16 +1,12 @@
 const pool = require('../config/db');
 
-// Todo (refactor) : edit payload of jwtGenerator in order to access user id with req.user.id instead of req.user.
-
-// Get all posts from a specific user
 exports.getAllPosts = async (req, res) => {
     try {
-        console.log(req.user);
         const allBlogPosts = await pool.query(
             `SELECT blog_posts.id, blog_posts.title, blog_posts.content FROM users
              LEFT JOIN blog_posts ON users.id = blog_posts.user_id
              WHERE users.id = $1`,
-            [req.user]
+            [req.user.id]
         );
         res.json(allBlogPosts.rows);
     } catch (err) {
@@ -23,7 +19,7 @@ exports.createPost = async (req, res) => {
         const { title, content } = req.body;
         const newBlogPost = await pool.query(
             'INSERT INTO blog_posts (title, content, user_id) VALUES($1, $2, $3) RETURNING *',
-            [title, content, req.user]
+            [title, content, req.user.id]
         );
         res.json(newBlogPost.rows[0]);
     } catch (err) {
@@ -48,11 +44,10 @@ exports.editPost = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, content } = req.body;
-        // Todo : set title AND content of the blog
         // Update a blog post if the id of the post matches user's id.
         const updateBlogPost = await pool.query(
             'UPDATE blog_posts SET title = $1, content = $2 WHERE id = $3 AND user_id = $4 RETURNING *',
-            [title, content, id, req.user]
+            [title, content, id, req.user.id]
         );
 
         if (updateBlogPost.rows.length === 0) {
@@ -70,7 +65,7 @@ exports.deletePost = async (req, res) => {
         const { id } = req.params;
         const deleteBlogPost = await pool.query(
             'DELETE FROM blog_posts WHERE id = $1 AND user_id = $2 RETURNING *',
-            [id, req.user]
+            [id, req.user.id]
         );
 
         if (deleteBlogPost.rows.length === 0) {

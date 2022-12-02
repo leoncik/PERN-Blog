@@ -8,9 +8,7 @@
     "paths": {
         "/login": {
             "post": {
-                "tags": [
-                    "User"
-                ],
+                "tags": ["User"],
                 "description": "Login user.",
                 "parameters": [
                     {
@@ -66,7 +64,7 @@
                         "name": "Authorization",
                         "description": "JWT token",
                         "required": true,
-                        "schema":{
+                        "schema": {
                             "type": "string"
                         }
                     }
@@ -242,9 +240,7 @@
                 }
             },
             "post": {
-                "tags": [
-                    "Blog posts"
-                ],
+                "tags": ["Blog posts"],
                 "description": "Add a blog post.",
                 "parameters": [
                     {
@@ -283,9 +279,7 @@
         },
         "/posts/{postId}": {
             "put": {
-                "tags": [
-                    "Blog posts"
-                ],
+                "tags": ["Blog posts"],
                 "description": "Edit a blog post of connected user.",
                 "parameters": [
                     {
@@ -317,7 +311,7 @@
                                 "title": {
                                     "type": "string"
                                 },
-                                "content":  {
+                                "content": {
                                     "type": "string"
                                 }
                             }
@@ -352,9 +346,7 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "Blog posts"
-                ],
+                "tags": ["Blog posts"],
                 "description": "Delete a blog post.",
                 "parameters": [
                     {
@@ -385,9 +377,7 @@
         },
         "/verify-token": {
             "get": {
-                "tags": [
-                    "Session"
-                ],
+                "tags": ["Session"],
                 "description": "Check if user is authenticated.",
                 "parameters": [
                     {
