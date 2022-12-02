@@ -50,7 +50,6 @@ function Profile() {
 
     // Get user's profile data
     useEffect(() => {
-        console.log(isLoggedIn);
         const fetchProfile = async () => {
             const userProfile = await authenticatedRequest(
                 'GET',

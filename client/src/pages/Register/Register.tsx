@@ -50,7 +50,6 @@ function Register() {
             password: passwordRef.current?.value,
             username: usernameRef.current?.value,
         };
-        console.log(formData);
         register(endpoint.registerEndpoint, formData)
 
 

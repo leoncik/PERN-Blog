@@ -29,7 +29,7 @@ export const useLogin = () => {
             data
         );
 
-        if (requestResponse.data.status === 200) {
+        if (requestResponse?.data?.status && requestResponse.data.status === 200) {
             // Save token in Redux's store and local storage
             const token = requestResponse.data.token;
             localStorage.setItem('token', token);

@@ -36,7 +36,6 @@ export const genericFetchRequest = async (apiEndPoint: string) => {
     }
 };
 
-// Todo : refactor into smaller functions.
 /**
  * Send a POST request to authenticate user.
  * @param {string} method - fetch method

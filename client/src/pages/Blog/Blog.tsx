@@ -44,7 +44,6 @@ function Blog() {
 
     // Get blog posts
     useEffect(() => {
-        console.log(isLoggedIn);
         const fetchBlogPosts = async () => {
             setIsLoading(true);
             const blogPostsData = await authenticatedRequest(
@@ -66,8 +65,6 @@ function Blog() {
 
         fetchBlogPosts();
     }, []);
-
-    console.log(blogPosts);
 
     // Create a blog post
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
