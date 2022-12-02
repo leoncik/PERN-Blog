@@ -50,9 +50,15 @@ On the server side, I have used [Express](https://expressjs.com/) to build the A
 
 Home page :
 
+![Home page](./docs/home-page.png)
+
 Blog page :
 
+![Blog page](./docs/blog-page.png)
+
 Profile page :
+
+![Profile page](./docs/profile-page.png)
 
 ## Documentation
 
