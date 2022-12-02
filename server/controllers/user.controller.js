@@ -78,6 +78,6 @@ exports.deleteUser = async (req, res) => {
 
         res.json('User and his blog posts has been deleted successfully.');
     } catch (err) {
-        console.error(err.message);
+        return res.status(400).send('Invalid user value.');
     }
 };

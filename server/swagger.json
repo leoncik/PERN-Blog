@@ -46,6 +46,12 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Invalid email or password."
+                    },
+                    "500": {
+                        "description": "Server error."
                     }
                 }
             }
@@ -86,6 +92,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "description": "Server error."
                     }
                 }
             }
@@ -140,6 +149,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "description": "Server error."
                     }
                 }
             }
@@ -162,6 +174,12 @@
                 "responses": {
                     "200": {
                         "description": "Successfully added user's avatar"
+                    },
+                    "400": {
+                        "description": "No files were uploaded."
+                    },
+                    "500": {
+                        "description": "Server error."
                     }
                 }
             }
@@ -184,6 +202,9 @@
                 "responses": {
                     "200": {
                         "description": "Successfully deleted user."
+                    },
+                    "400": {
+                        "description": "Invalid user value."
                     }
                 }
             }
@@ -358,6 +379,45 @@
                 "responses": {
                     "200": {
                         "description": "Successfully deleted blog post"
+                    }
+                }
+            }
+        },
+        "/verify-token": {
+            "get": {
+                "tags": [
+                    "Session"
+                ],
+                "description": "Check if user is authenticated.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "JWT token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Not authorized."
                     }
                 }
             }
