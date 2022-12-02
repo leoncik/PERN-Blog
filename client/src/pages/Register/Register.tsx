@@ -5,6 +5,9 @@ import { userActions } from '../../features/userSlice';
 // React Hooks
 import { useRef } from 'react';
 
+// Custom Hooks
+import { useRegister } from '../../hooks/useRegister';
+
 // Routing
 import { Navigate } from 'react-router-dom';
 
@@ -31,6 +34,9 @@ function Register() {
     );
     const dispatch = useDispatch();
 
+    // Custom Hooks
+    const {register, isLoading, error} = useRegister();
+
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -45,19 +51,9 @@ function Register() {
             username: usernameRef.current?.value,
         };
         console.log(formData);
+        register(endpoint.registerEndpoint, formData)
 
-        const response: any = await genericPostRequest(
-            'http://localhost:5000/register/',
-            formData
-        );
-        const token = response.data;
-        dispatch(userActions.setToken(token));
-        const newUserProfile = await authenticatedRequest(
-            'GET',
-            endpoint.userProfileEndpoint,
-            token
-        );
-        dispatch(userActions.setIsLoggedIn(newUserProfile));
+
     };
     return !isLoggedIn ? (
         <Layout>
@@ -75,8 +71,17 @@ function Register() {
 
                     <label htmlFor="password">Password</label>
                     <input ref={passwordRef} type="password" id="password" />
-                    <button>Register</button>
+                    <button disabled={isLoading}>
+                        {isLoading ? 'Loading...' : 'Register'}
+                    </button>
                 </form>
+
+                {error && (
+                    <div className={classes['error-message']}>
+                        <p>{error}</p>
+                    </div>
+
+                )}
             </div>
         </Layout>
     ) : (

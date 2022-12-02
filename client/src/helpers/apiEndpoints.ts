@@ -42,8 +42,16 @@ const userBlogPostsEndpoint = `${apiBaseUrl}/posts`;
  */
 const checkTokenEndpoint = `${apiBaseUrl}/verify-token`;
 
+/**
+ * Verify if a token is valid
+ * Request type : GET
+ * @returns {string} Returns the endpoint for the token verification.
+ */
+const registerEndpoint = `${apiBaseUrl}/register/`;
+
 export {
     userLoginEndpoint,
+    registerEndpoint,
     userProfileEndpoint,
     userBlogPostsEndpoint,
     userProfileUsernameEndpoint,
