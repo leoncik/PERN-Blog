@@ -5,6 +5,10 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 ## Table of contents
 
 -   [Presentation](#presentation)
+    -   [About this project](#about-this-project)
+    -   [Features](#features)
+    -   [Screenshots](#screenshots)
+-   [Documentation](#presentation)
     -   [Database schema](#database-schema)
     -   [API documentation](#api-documentation)
 -   [How to use](#how-to-use)
@@ -18,6 +22,39 @@ A full-stack project made with the PERN stack (PostgreSQL, Express, React, Node.
 -   [Assets credits](#assets-credits)
 
 ## Presentation
+
+### About this project
+
+This is a personal project I have made to learn more about backend development. It is a personal blogging platform (called "Scribissimus") where an user can register and make some blog posts.
+
+The front-end part of the project was made with [React](https://reactjs.org/) and [Redux](https://redux.js.org/) as a state manager.
+
+On the server side, I have used [Express](https://expressjs.com/) to build the API and [PostgreSQL](https://www.postgresql.org/) for the database.
+
+### Features
+
+- User management :
+    * Registration.
+    * Login.
+    * Logout.
+    * Keeping session active on page refresh with JWT token.
+    * Avatar image upload.
+    * Account deletion.
+
+- Blog posts management :
+    * Create a blog post.
+    * Delete a blog post.
+    * Edit a blog post.
+
+### Screenshots
+
+Home page :
+
+Blog page :
+
+Profile page :
+
+## Documentation
 
 ### Database schema
 
