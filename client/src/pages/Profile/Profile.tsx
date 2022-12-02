@@ -122,6 +122,7 @@ function Profile() {
                 },
             });
             dispatch(userActions.deleteUser());
+            localStorage.removeItem('token');
         } catch (error) {
             console.log(error);
         }
