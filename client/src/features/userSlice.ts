@@ -37,19 +37,16 @@ const userSlice = createSlice({
         },
         setIsLoggedOut: (draft: IUserState) => {
             draft.isLoggedIn = false;
+            draft.username = '';
+            draft.avatar = '';
+            draft.token = '';
+            draft.registeredDate = '';
         },
         editUsername: (draft: IUserState, action) => {
             draft.username = action.payload;
         },
         updateAvatar: (draft: IUserState, action) => {
             draft.avatar = action.payload;
-        },
-        deleteUser: (draft: IUserState) => {
-            draft.isLoggedIn = false;
-            draft.username = '';
-            draft.avatar = '';
-            draft.token = '';
-            draft.registeredDate = '';
         },
     },
 });

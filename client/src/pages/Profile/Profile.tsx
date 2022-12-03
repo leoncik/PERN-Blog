@@ -118,7 +118,7 @@ function Profile() {
                     token: token,
                 },
             });
-            dispatch(userActions.deleteUser());
+            dispatch(userActions.setIsLoggedOut());
             localStorage.removeItem('token');
         } catch (error) {
             console.log(error);
