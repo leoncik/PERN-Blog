@@ -89,25 +89,23 @@ function Profile() {
         dispatch(userActions.editUsername(enteredCUsername));
     };
 
-    const handleUploadAvatar = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleUploadAvatar = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (fileRef.current?.files !== null && fileRef.current?.files[0]) {
             const formData = new FormData();
             formData.append('file', fileRef.current?.files[0]);
             formData.append('fileName', fileRef.current?.files[0].name);
 
-            authenticatedRequest(
+            await authenticatedRequest(
                 'POST/File',
                 endpoint.userUploadAvatarEndpoint,
                 token,
                 formData
             );
-            setTimeout(() => {
-                if (fileRef.current !== null && fileRef.current.files !== null)
+            if (fileRef.current !== null && fileRef.current.files !== null)
                 dispatch(
                     userActions.updateAvatar(fileRef.current?.files[0].name)
                 );
-            }, 1000);
         }
     };
 
