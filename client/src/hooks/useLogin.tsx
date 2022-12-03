@@ -5,10 +5,7 @@ import { useDispatch } from 'react-redux';
 import { userActions } from '../features/userSlice';
 
 // Helpers
-import {
-    genericPostRequest,
-    authenticatedRequest,
-} from '../helpers/fetchHandlers';
+import { genericPostRequest } from '../helpers/fetchHandlers';
 
 export const useLogin = () => {
     // States
@@ -18,10 +15,7 @@ export const useLogin = () => {
     // Redux
     const dispatch = useDispatch();
 
-    const login = async (
-        loginEndpoint: string,
-        data: any
-    ) => {
+    const login = async (loginEndpoint: string, data: any) => {
         setIsLoading(true);
         setError(null);
         const requestResponse: any = await genericPostRequest(
@@ -29,7 +23,10 @@ export const useLogin = () => {
             data
         );
 
-        if (requestResponse?.data?.status && requestResponse.data.status === 200) {
+        if (
+            requestResponse?.data?.status &&
+            requestResponse.data.status === 200
+        ) {
             // Save token in Redux's store and local storage
             const token = requestResponse.data.token;
             localStorage.setItem('token', token);
@@ -37,11 +34,9 @@ export const useLogin = () => {
             dispatch(userActions.setIsLoggedIn());
             setIsLoading(false);
         } else {
-            setError('Your email or password is incorrect.')
+            setError('Your email or password is incorrect.');
         }
         setIsLoading(false);
-
-
     };
 
     return { login, isLoading, error };

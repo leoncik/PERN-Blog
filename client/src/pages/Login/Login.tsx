@@ -1,6 +1,5 @@
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../features/userSlice';
+import { useSelector } from 'react-redux';
 
 // React Hooks
 import { useRef } from 'react';
@@ -19,10 +18,6 @@ import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 // Helpers
-import {
-    authenticatedRequest,
-    genericPostRequest,
-} from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
 
 // Interfaces
@@ -47,10 +42,7 @@ function Login() {
             email: emailRef.current?.value,
             password: passwordRef.current?.value,
         };
-        await login(
-            endpoint.userLoginEndpoint,
-            formData
-        );
+        await login(endpoint.userLoginEndpoint, formData);
     };
 
     console.log(error);
@@ -69,14 +61,13 @@ function Login() {
                         {isLoading ? 'Loading...' : 'Login'}
                     </button>
                 </form>
-                
-                    {error && (
-                        <div className={classes['error-message']}>
-                    <p>{error}</p>
+
+                {error && (
+                    <div className={classes['error-message']}>
+                        <p>{error}</p>
                     </div>
-                       
-                    )}
-                
+                )}
+
                 <Link className={classes['register-link']} to="/register">
                     You don't have an account yet ? Create one !
                 </Link>

@@ -5,10 +5,7 @@ import { useDispatch } from 'react-redux';
 import { userActions } from '../features/userSlice';
 
 // Helpers
-import {
-    genericPostRequest,
-    authenticatedRequest,
-} from '../helpers/fetchHandlers';
+import { genericPostRequest } from '../helpers/fetchHandlers';
 
 export const useRegister = () => {
     // States
@@ -18,16 +15,10 @@ export const useRegister = () => {
     // Redux
     const dispatch = useDispatch();
 
-    const register = async (
-        registerEndpoint: string,
-        data: any
-    ) => {
+    const register = async (registerEndpoint: string, data: any) => {
         setIsLoading(true);
         setError(null);
-        const response: any = await genericPostRequest(
-            registerEndpoint,
-            data
-        );
+        const response: any = await genericPostRequest(registerEndpoint, data);
 
         if (response.data.status === 200) {
             // Save token in Redux's store and local storage
@@ -37,11 +28,9 @@ export const useRegister = () => {
             dispatch(userActions.setIsLoggedIn());
             setIsLoading(false);
         } else {
-            setError("Server error.")
+            setError('Server error.');
         }
         setIsLoading(false);
-
-
     };
 
     return { register, isLoading, error };

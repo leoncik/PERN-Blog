@@ -1,27 +1,3 @@
-.overview {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 50px;
-}
-
-.frame {
-    width: 200px;
-    height: 200px;
-    background-color: black;
-    border: 5px ridge gold;
-}
-
-.avatar-picture {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.stat-value {
-    color: gold;
-}
-
 .edit-profile-form {
     margin-bottom: 40px;
 }
@@ -39,20 +15,12 @@
     margin-bottom: 50px;
 }
 
-.delete-profile-form {
-    margin-bottom: 50px;
-}
-
-.delete-profile-button {
-    color: white;
-    background-color: crimson;
-}
-
 .custom-file-container {
     display: flex;
     align-items: center;
     gap: 25px;
 }
+
 .custom-file-button {
     margin-top: 0;
     padding: 2px 7px;
@@ -64,6 +32,7 @@
     font-size: 1.3rem;
     cursor: pointer;
 }
+
 .custom-file-button:active {
     transform: scale(0.98);
 }

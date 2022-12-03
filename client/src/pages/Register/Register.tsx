@@ -1,6 +1,5 @@
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../features/userSlice';
+import { useSelector } from 'react-redux';
 
 // React Hooks
 import { useRef } from 'react';
@@ -12,10 +11,6 @@ import { useRegister } from '../../hooks/useRegister';
 import { Navigate } from 'react-router-dom';
 
 // Helpers
-import {
-    genericPostRequest,
-    authenticatedRequest,
-} from '../../helpers/fetchHandlers';
 import * as endpoint from '../../helpers/apiEndpoints';
 
 // Interfaces
@@ -32,10 +27,9 @@ function Register() {
     const isLoggedIn = useSelector(
         (state: IRootState) => state.user.isLoggedIn
     );
-    const dispatch = useDispatch();
 
     // Custom Hooks
-    const {register, isLoading, error} = useRegister();
+    const { register, isLoading, error } = useRegister();
 
     // Refs
     const emailRef = useRef<HTMLInputElement>(null);
@@ -50,9 +44,7 @@ function Register() {
             password: passwordRef.current?.value,
             username: usernameRef.current?.value,
         };
-        register(endpoint.registerEndpoint, formData)
-
-
+        register(endpoint.registerEndpoint, formData);
     };
     return !isLoggedIn ? (
         <Layout>
@@ -79,7 +71,6 @@ function Register() {
                     <div className={classes['error-message']}>
                         <p>{error}</p>
                     </div>
-
                 )}
             </div>
         </Layout>
