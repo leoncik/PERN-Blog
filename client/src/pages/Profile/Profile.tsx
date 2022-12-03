@@ -1,5 +1,5 @@
 // React Hooks
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -43,9 +43,12 @@ function Profile() {
 
     // Refs
     const usernameRef = useRef<HTMLInputElement>(null);
-    const fileRef = useRef<HTMLInputElement|null>(null);
+    const fileRef = useRef<HTMLInputElement | null>(null);
 
     // Local states
+    const [fileName, setFileName] = useState('No file chosen.');
+
+    // Helpers
     const baseAvatarSrc = 'http://localhost:5000/images/avatar/';
 
     // Get user's profile data
@@ -125,6 +128,10 @@ function Profile() {
         }
     };
 
+    const handleFileChange = (e: any) => {
+        setFileName(e.target.value.replace('C:\\fakepath\\', ''));
+    };
+
     return !isLoggedIn ? (
         <Navigate replace to="/" />
     ) : (
@@ -193,19 +200,29 @@ function Profile() {
                         onSubmit={handleUploadAvatar}
                         encType="multipart/form-data"
                     >
-                        <label
-                            className={classes['profile-label']}
-                            htmlFor="avatar-upload"
-                        >
+                        <p className={classes['profile-label']}>
                             Upload your profile picture
-                        </label>
-                        <input
-                            ref={fileRef}
-                            type="file"
-                            name="uploaded_file"
-                            accept="jpg jpeg png webp"
-                            id="avatar-upload"
-                        />
+                        </p>
+                        <div className={classes['custom-file-container']}>
+                            <label
+                                htmlFor="avatar-upload"
+                                className={classes['custom-file-button']}
+                            >
+                                Select a profile picture
+                            </label>
+                            <input
+                                ref={fileRef}
+                                type="file"
+                                name="uploaded_file"
+                                accept="jpg jpeg png webp"
+                                id="avatar-upload"
+                                hidden={true}
+                                onChange={handleFileChange}
+                            />
+                            <span className={classes['file-upload-text']}>
+                                {fileName}
+                            </span>
+                        </div>
 
                         <button>Upload avatar</button>
                     </form>

@@ -47,3 +47,23 @@
     color: white;
     background-color: crimson;
 }
+
+.custom-file-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.custom-file-button {
+    margin-top: 0;
+    padding: 2px 7px;
+    font-family: 'Overpass';
+    background-color: #fff;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.custom-file-button:active {
+    transform: scale(0.98);
+}
