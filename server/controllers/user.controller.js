@@ -5,7 +5,8 @@ const fs = require('fs');
 exports.getProfile = async (req, res) => {
     try {
         const profile = await pool.query(
-            'SELECT username, avatar, registered_date FROM users WHERE id = $1',
+            `SELECT username, avatar, registered_date
+             FROM users WHERE id = $1`,
             [req.user.id]
         );
 
@@ -19,7 +20,7 @@ exports.getProfile = async (req, res) => {
 exports.editUsername = async (req, res) => {
     try {
         const { username } = req.body;
-        const profile = await pool.query(
+        await pool.query(
             `UPDATE users SET username = $1
              WHERE id = $2`,
             [username, req.user.id]
@@ -42,9 +43,10 @@ exports.sendAvatar = async (req, res) => {
         [req.user.id]
     );
     const previousAvatarName = previousAvatar.rows[0].avatar;
-    const newAvatar = await pool.query(
+    // Update user with new avatar filename
+    await pool.query(
         `UPDATE users SET avatar = $1
-             WHERE id = $2`,
+         WHERE id = $2`,
         [file.name, req.user.id]
     );
 
@@ -68,13 +70,17 @@ exports.sendAvatar = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
-        const deleteBlogPosts = await pool.query(
-            'DELETE FROM blog_posts WHERE user_id = $1',
-            [req.user.id]
+        // Delete all blog posts from connected user
+        await pool.query(
+            `DELETE FROM blog_posts
+             WHERE user_id = $1`,
+             [req.user.id]
         );
-        const deleteUser = await pool.query('DELETE FROM users WHERE id = $1', [
-            req.user.id,
-        ]);
+        // Delete connected user
+        await pool.query(
+            `DELETE FROM users
+             WHERE id = $1`,
+             [req.user.id]);
 
         res.json('User and his blog posts has been deleted successfully.');
     } catch (err) {

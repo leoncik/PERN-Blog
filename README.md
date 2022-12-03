@@ -108,6 +108,8 @@ CREATE DATABASE your_database_name;
 
 2) Run the server with `pnpm dev`
 
+3) The app should be available on http://localhost:5173/
+
 ## Available scripts
 
 #### Client
