@@ -55,8 +55,15 @@ function EditProfile() {
         e.preventDefault();
         if (fileRef.current?.files !== null && fileRef.current?.files[0]) {
             const formData = new FormData();
-            formData.append('file', fileRef.current?.files[0]);
-            formData.append('fileName', fileRef.current?.files[0].name);
+            const cleanedFileName = fileRef.current?.files[0].name
+                .replace(/à|â/g, 'a')
+                .replace(/é|è|ê/g, 'e')
+                .replace(/î/g, 'i')
+                .replace(/ô/g, 'o')
+                .replace(/û|ù/g, 'u')
+                .split(' ')
+                .join('_');
+            formData.append('file', fileRef.current?.files[0], cleanedFileName);
 
             await authenticatedRequest(
                 'POST/File',
@@ -65,9 +72,7 @@ function EditProfile() {
                 formData
             );
             if (fileRef.current !== null && fileRef.current.files !== null)
-                dispatch(
-                    userActions.updateAvatar(fileRef.current?.files[0].name)
-                );
+                dispatch(userActions.updateAvatar(cleanedFileName));
         }
     };
 

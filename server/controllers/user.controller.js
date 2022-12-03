@@ -36,21 +36,31 @@ exports.sendAvatar = async (req, res) => {
         return res.status(400).send('No files were uploaded.');
     }
 
-    const file = req.files.file;
     const previousAvatar = await pool.query(
         `SELECT avatar FROM users
          WHERE id = $1`,
         [req.user.id]
     );
-    const previousAvatarName = previousAvatar.rows[0].avatar;
+
     // Update user with new avatar filename
+    // We also replace empty spaces with underscores and some special characters in case this could not be done on the client side.
+    const file = req.files.file;
+    const cleanedFileName = file.name
+        .replace(/à|â/g, 'a')
+        .replace(/é|è|ê/g, 'e')
+        .replace(/î/g, 'i')
+        .replace(/ô/g, 'o')
+        .replace(/û|ù/g, 'u')
+        .split(' ')
+        .join('_');
     await pool.query(
         `UPDATE users SET avatar = $1
          WHERE id = $2`,
-        [file.name, req.user.id]
+        [cleanedFileName, req.user.id]
     );
 
     // Remove previous avatar file if It exists.
+    const previousAvatarName = previousAvatar.rows[0].avatar;
     if (fs.existsSync(imgPath + 'avatar/' + previousAvatarName)) {
         fs.unlink(imgPath + 'avatar/' + previousAvatarName, (err) => {
             if (err) throw err;
@@ -59,7 +69,7 @@ exports.sendAvatar = async (req, res) => {
     }
 
     // Write new avatar file.
-    const path = imgPath + 'avatar/' + file.name;
+    const path = imgPath + 'avatar/' + cleanedFileName;
     file.mv(path, (err) => {
         if (err) {
             return res.status(500).send(err);
@@ -74,13 +84,14 @@ exports.deleteUser = async (req, res) => {
         await pool.query(
             `DELETE FROM blog_posts
              WHERE user_id = $1`,
-             [req.user.id]
+            [req.user.id]
         );
         // Delete connected user
         await pool.query(
             `DELETE FROM users
              WHERE id = $1`,
-             [req.user.id]);
+            [req.user.id]
+        );
 
         res.json('User and his blog posts has been deleted successfully.');
     } catch (err) {
