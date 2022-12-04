@@ -1,13 +1,15 @@
 // React Hooks
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
+import { blogPostsActions, IBlogPosts } from '../../features/blogPostsSlice';
 
 // Routing
 import { Navigate } from 'react-router-dom';
 
 // Page components
+import AddPost from '../../components/BlogPost/AddPost/AddPost';
 import BlogPost from '../../components/BlogPost/BlogPost';
 import Layout from '../../components/layout/Layout/Layout';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -22,7 +24,6 @@ import classes from './Blog.module.css';
 
 // Interfaces
 import { IRootState } from '../../app/store';
-import { blogPostsActions, IBlogPosts } from '../../features/blogPostsSlice';
 
 function Blog() {
     // Redux
@@ -34,10 +35,6 @@ function Blog() {
     const blogPosts = useSelector(
         (state: IRootState) => state?.blogPosts?.blogPosts
     );
-
-    // Refs
-    const postTitleRef = useRef<HTMLInputElement>(null);
-    const postContentRef = useRef<HTMLTextAreaElement>(null);
 
     // States
     const [isLoading, setIsLoading] = useState(false);
@@ -66,48 +63,13 @@ function Blog() {
         fetchBlogPosts();
     }, []);
 
-    // Create a blog post
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const enteredTitle = postTitleRef.current?.value;
-        const enteredContent = postContentRef.current?.value;
-
-        const formData = {
-            title: enteredTitle,
-            content: enteredContent,
-        };
-
-        const newPost = await authenticatedRequest(
-            'POST',
-            'http://localhost:5000/posts/',
-            token,
-            formData
-        );
-        dispatch(blogPostsActions.addBlogPost(newPost.data));
-    };
-
     return isLoggedIn ? (
         <Layout>
             <div className={classes['blog-page']}>
                 <h1>Blog page</h1>
                 <section>
                     <h2>Add a blog post</h2>
-                    <form
-                        onSubmit={handleSubmit}
-                        className={classes['new-blog-post-form']}
-                    >
-                        <label htmlFor="post-title">Post title</label>
-                        <input ref={postTitleRef} type="text" id="post-title" />
-
-                        <label htmlFor="post-content">Post content</label>
-                        <textarea
-                            ref={postContentRef}
-                            id="post-content"
-                        ></textarea>
-
-                        <button>Add blog post</button>
-                    </form>
+                    <AddPost />
                 </section>
 
                 <Separator />

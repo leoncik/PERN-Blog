@@ -1,0 +1,13 @@
+.new-blog-post-form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+label {
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 25px;
+}
