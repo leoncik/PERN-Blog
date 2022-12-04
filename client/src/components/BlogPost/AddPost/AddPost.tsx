@@ -48,6 +48,12 @@ function AddPost() {
             formData
         );
         dispatch(blogPostsActions.addBlogPost(newPost.data));
+
+        // Empty form after submission
+        if (postTitleRef.current !== null && postContentRef.current !== null) {
+            postTitleRef.current.value = '';
+            postContentRef.current.value = '';
+        }
     };
 
     return (

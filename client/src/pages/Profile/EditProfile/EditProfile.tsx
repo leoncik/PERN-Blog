@@ -52,6 +52,8 @@ function EditProfile() {
         const enteredCUsername = usernameRef.current?.value;
         editUsername();
         dispatch(userActions.editUsername(enteredCUsername));
+        // Empty input after submission
+        if (usernameRef.current) usernameRef.current.value = '';
     };
 
     const handleUploadAvatar = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,6 +78,7 @@ function EditProfile() {
             );
             if (fileRef.current !== null && fileRef.current.files !== null)
                 dispatch(userActions.updateAvatar(cleanedFileName));
+            setFileName('Your avatar has been updated.');
         }
     };
 
