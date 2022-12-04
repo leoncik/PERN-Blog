@@ -1,3 +1,6 @@
+@value variables: "../../../variables.css";
+@value primary-color from variables;
+
 .overview {
     display: flex;
     flex-direction: row-reverse;
@@ -9,7 +12,7 @@
     width: 200px;
     height: 200px;
     background-color: black;
-    border: 5px ridge gold;
+    border: 5px ridge primary-color;
 }
 
 .avatar-picture {
@@ -19,5 +22,5 @@
 }
 
 .stat-value {
-    color: gold;
+    color: primary-color;
 }

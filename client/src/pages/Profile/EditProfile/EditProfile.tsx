@@ -12,6 +12,9 @@ import { authenticatedRequest } from '../../../helpers/fetchHandlers';
 // CSS
 import classes from './EditProfile.module.css';
 
+// Assets
+import uploadIcon from '../../../assets/icons/cloud-upload-sharp.svg';
+
 // Interfaces
 import { IRootState } from '../../../app/store';
 
@@ -119,7 +122,12 @@ function EditProfile() {
                             htmlFor="avatar-upload"
                             className={classes['custom-file-button']}
                         >
-                            Select a profile picture
+                            <span>Select a profile picture</span>
+                            <img
+                                className={classes['upload-icon']}
+                                src={uploadIcon}
+                                alt=""
+                            />
                         </label>
                         <input
                             ref={fileRef}

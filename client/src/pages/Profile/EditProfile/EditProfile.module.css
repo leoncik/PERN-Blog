@@ -1,9 +1,12 @@
+@value variables: "../../../variables.css";
+@value primary-color from variables;
+
 .edit-profile-form {
     margin-bottom: 40px;
 }
 
 .profile-label {
-    color: gold;
+    color: primary-color;
 }
 
 .username-input {
@@ -22,6 +25,11 @@
 }
 
 .custom-file-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
     margin-top: 0;
     padding: 2px 7px;
     font-family: 'Overpass';
@@ -31,6 +39,10 @@
     border: none;
     font-size: 1.3rem;
     cursor: pointer;
+}
+
+.upload-icon {
+    width: 40px;
 }
 
 .custom-file-button:active {

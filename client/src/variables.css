@@ -1,5 +1,8 @@
 :root {
     --main-background: #222;
+    --primary-color: gold;
     --text-color: white;
     --primary-color: black;
 }
+
+@value primary-color: gold;

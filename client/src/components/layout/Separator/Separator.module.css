@@ -1,6 +1,9 @@
+@value variables: "../../../variables.css";
+@value primary-color from variables;
+
 .separator {
     margin-top: 40px;
     height: 2px;
     width: 100%;
-    background-color: gold;
+    background-color: primary-color;
 }

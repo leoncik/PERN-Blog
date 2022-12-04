@@ -1,3 +1,6 @@
+@value variables: "../../variables.css";
+@value primary-color from variables;
+
 .hero {
     margin-top: 50px;
     display: flex;
@@ -16,7 +19,7 @@
     padding: 4px 7px;
     border-radius: 15px;
     color: black;
-    background-color: gold;
+    background-color: primary-color;
     transition: ease-in-out 0.2s;
 }
 

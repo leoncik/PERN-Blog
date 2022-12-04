@@ -8,7 +8,7 @@ import classes from './Overview.module.css';
 import { IRootState } from '../../../app/store';
 
 // Assets
-import defaultAvatar from '../../../assets/images/defaultAvatar.svg';
+import defaultAvatar from '../../../assets/images/default-avatar.svg';
 
 function Overview() {
     // Redux
