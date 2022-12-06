@@ -1,16 +1,17 @@
-const pool = require('../config/db');
+const {
+    getProfileDb,
+    editUsernameDb,
+    getPreviousAvatarDb,
+    updateAvatarDb,
+    deleteAccountDb,
+} = require('../db/user.db');
 const imgPath = require('../app');
 const fs = require('fs');
 
 exports.getProfile = async (req, res) => {
     try {
-        const profile = await pool.query(
-            `SELECT username, avatar, registered_date
-             FROM users WHERE id = $1`,
-            [req.user.id]
-        );
-
-        res.json(profile.rows[0]);
+        const profile = await getProfileDb(req);
+        res.json(profile[0]);
     } catch (error) {
         console.log(error);
         return res.status(500).send('Server error.');
@@ -19,12 +20,7 @@ exports.getProfile = async (req, res) => {
 
 exports.editUsername = async (req, res) => {
     try {
-        const { username } = req.body;
-        await pool.query(
-            `UPDATE users SET username = $1
-             WHERE id = $2`,
-            [username, req.user.id]
-        );
+        editUsernameDb(req);
     } catch (error) {
         console.log(error);
         return res.status(500).send('Server error.');
@@ -36,11 +32,7 @@ exports.sendAvatar = async (req, res) => {
         return res.status(400).send('No files were uploaded.');
     }
 
-    const previousAvatar = await pool.query(
-        `SELECT avatar FROM users
-         WHERE id = $1`,
-        [req.user.id]
-    );
+    const previousAvatar = await getPreviousAvatarDb(req);
 
     // Update user with new avatar filename
     // We also replace empty spaces with underscores and some special characters in case this could not be done on the client side.
@@ -53,11 +45,8 @@ exports.sendAvatar = async (req, res) => {
         .replace(/û|ù/g, 'u')
         .split(' ')
         .join('_');
-    await pool.query(
-        `UPDATE users SET avatar = $1
-         WHERE id = $2`,
-        [cleanedFileName, req.user.id]
-    );
+
+    updateAvatarDb(cleanedFileName, req);
 
     // Remove previous avatar file if It exists.
     const previousAvatarName = previousAvatar.rows[0].avatar;
@@ -80,19 +69,7 @@ exports.sendAvatar = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
-        // Delete all blog posts from connected user
-        await pool.query(
-            `DELETE FROM blog_posts
-             WHERE user_id = $1`,
-            [req.user.id]
-        );
-        // Delete connected user
-        await pool.query(
-            `DELETE FROM users
-             WHERE id = $1`,
-            [req.user.id]
-        );
-
+        deleteAccountDb(req);
         res.json('User and his blog posts has been deleted successfully.');
     } catch (err) {
         return res.status(400).send('Invalid user value.');
