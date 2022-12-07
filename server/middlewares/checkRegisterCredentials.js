@@ -1,8 +1,9 @@
+const { mailRegex } = require('../utils/helpers');
+
 module.exports = function (req, res, next) {
     const { email, username, password } = req.body;
 
-    const validEmail = (userEmail) =>
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
+    const validEmail = (userEmail) => mailRegex.test(userEmail);
 
     // Check if ant field is empty
     if (![email, username, password].every(Boolean)) {

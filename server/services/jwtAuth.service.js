@@ -34,7 +34,6 @@ class JwtAuthService {
         if (req.user.id) {
             return true;
         } else {
-            console.error(error);
             res.status(500).send('Server error.');
             return false;
         }
