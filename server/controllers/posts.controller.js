@@ -1,52 +1,21 @@
-const {
-    getAllPostsDb,
-    createPostDb,
-    editPostDb,
-    deletePostDb,
-} = require('../db/posts.db');
+const postsService = require('../services/posts.service');
 
 exports.getAllPosts = async (req, res) => {
-    try {
-        const allBlogPosts = await getAllPostsDb(req);
-        res.json(allBlogPosts);
-    } catch (err) {
-        console.error(err.message);
-    }
+    const allBlogPosts = await postsService.getAllPosts(req);
+    res.status(202).json(allBlogPosts);
 };
 
 exports.createPost = async (req, res) => {
-    try {
-        const newBlogPost = await createPostDb(req);
-        res.json(newBlogPost);
-    } catch (err) {
-        console.error(err.message);
-    }
+    const newBlogPost = await postsService.createPost(req);
+    res.json(newBlogPost);
 };
 
 exports.editPost = async (req, res) => {
-    try {
-        const updateBlogPost = await editPostDb(req);
-
-        if (updateBlogPost.length === 0) {
-            return res.json('This blog post does not match the current user.');
-        }
-
-        res.json('Blog post has been updated successfully.');
-    } catch (err) {
-        console.error(err.message);
-    }
+    postsService.editPost(req);
+    res.json('Blog post has been updated successfully.');
 };
 
 exports.deletePost = async (req, res) => {
-    try {
-        const deletedBlogPost = deletePostDb(req);
-
-        if (deletedBlogPost.length === 0) {
-            return res.json('This blog post does not match the current user.');
-        }
-
-        res.json('Blog post has been deleted successfully.');
-    } catch (err) {
-        console.error(err.message);
-    }
+    postsService.deletePost(req);
+    res.json('Blog post has been deleted successfully.');
 };
